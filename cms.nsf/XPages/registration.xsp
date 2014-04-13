@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom" pageTitle="Registration">
+	<xp:this.acl>
+		<xp:acl>
+			<xp:this.entries>
+				<xp:aclEntry right="EDITOR" type="ROLE" loaded="true">
+					<xp:this.name><![CDATA[[administrator]]]></xp:this.name>
+				</xp:aclEntry>
+			</xp:this.entries>
+		</xp:acl>
+	</xp:this.acl>
+
+	<xp:this.dataContexts>
+		<xp:dataContext var="viewName" value="registrations"></xp:dataContext>
+		<xp:dataContext var="documentName" value="registration"></xp:dataContext>
+	</xp:this.dataContexts>
+
+	<xp:this.resources>
+		<xp:script src="/utils" clientSide="false"></xp:script>
+		<xp:bundle src="/settings.properties" var="settings"></xp:bundle>
+	</xp:this.resources>
+
+	<xp:panel disableOutputTag="true">
+		<xp:this.data>
+			<xp:dominoDocument var="document1" formName="#{documentName}" action="openDocument"
+				computeWithForm="both">
+				<xp:this.postNewDocument><![CDATA[#{javascript:
+var eventId = context.getUrlParameter('eventid');
+document1.replaceItemValue('eventId', eventId);
+viewScope.eventLink = '/event.xsp?documentId=' + eventId;
+viewScope.eventUrl = '' + facesContext.getExternalContext().getRequestContextPath() + viewScope.eventLink;
+}]]></xp:this.postNewDocument>
+				<xp:this.postOpenDocument><![CDATA[#{javascript:
+var eventId = document1.getItemValueString('eventId');
+var event = database.getDocumentByUNID(eventId);
+viewScope.eventDateString = dateFormat(event.getItemValueDateTimeArray('date')[0], "d MMMM yyyy");
+viewScope.eventLink = '/event.xsp?documentId=' + eventId;
+viewScope.eventUrl = '' + facesContext.getExternalContext().getRequestContextPath() + viewScope.eventLink;
+}]]></xp:this.postOpenDocument>
+			</xp:dominoDocument>
+		</xp:this.data>
+
+		<xc:_layout selectedMenuItem="#{viewName}" pageTitle="#{javascript:@ProperCase(documentName)}"
+			pageSubtitle="#{javascript:if (document1.isNewNote()) {'New ' + documentName} else {document1.getItemValueString('name')}}">
+
+			<xp:this.facets>
+				<xp:panel xp:key="headerButtons">
+				</xp:panel>
+
+				<xp:panel xp:key="body">
+					<div class="row">
+						<div class="col-lg-8">
+							<div class="form-horizontal">
+								<div class="form-group">
+									<xp:label value="Name *" for="name" styleClass="col-lg-2"></xp:label>
+									<div class="col-lg-10">
+										<xp:inputText id="name" value="#{document1.name}" required="true">
+											<xp:this.attrs>
+												<xp:attr name="placeholder" value="John Doe"></xp:attr>
+											</xp:this.attrs>
+
+											<xp:this.validators>
+												<xp:validateRequired message="Please add a name. A person's gotta have one."></xp:validateRequired>
+											</xp:this.validators>
+										</xp:inputText>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<xp:label value="Email" for="email" styleClass="col-lg-2"></xp:label>
+									<div class="col-lg-10">
+										<xp:inputText id="email" value="#{document1.email}">
+											<xp:this.attrs>
+												<xp:attr name="placeholder" value="foo@bar.com"></xp:attr>
+											</xp:this.attrs>
+										</xp:inputText>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<xp:label value="Company" for="company" styleClass="col-lg-2"></xp:label>
+									<div class="col-lg-10">
+										<xp:inputText id="company" value="#{document1.company}">
+											<xp:this.attrs>
+												<xp:attr name="placeholder" value="Name of company or organisation"></xp:attr>
+											</xp:this.attrs>
+										</xp:inputText>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<xp:label value="Job title" for="jobtitle" styleClass="col-lg-2"></xp:label>
+									<div class="col-lg-10">
+										<xp:inputText id="jobtitle" value="#{document1.jobtitle}">
+											<xp:this.attrs>
+												<xp:attr name="placeholder" value="Manager. Everybody is a manager, right?"></xp:attr>
+											</xp:this.attrs>
+										</xp:inputText>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<xp:label value="Phone number" for="phonenumber" styleClass="col-lg-2"></xp:label>
+									<div class="col-lg-10">
+										<xp:inputText id="phonenumber" value="#{document1.phonenumber}">
+											<xp:this.attrs>
+												<xp:attr name="placeholder" value=""></xp:attr>
+											</xp:this.attrs>
+										</xp:inputText>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<xp:label value="Remarks" for="remarks" styleClass="col-lg-2"></xp:label>
+									<div class="col-lg-10">
+										<xp:inputTextarea id="remarks" value="#{document1.remarks}">
+											<xp:this.attrs>
+												<xp:attr name="placeholder" value="Be nice"></xp:attr>
+											</xp:this.attrs>
+										</xp:inputTextarea>
+									</div>
+								</div>
+
+								<xc:formActionButtons linkBack="#{viewScope.eventLink}"></xc:formActionButtons>
+							</div>
+						</div>
+					</div>
+				</xp:panel>
+			</xp:this.facets>
+		</xc:_layout>
+	</xp:panel>
+</xp:view>

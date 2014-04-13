@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config>
+  <faces-config-extension>
+    <namespace-uri>http://www.ibm.com/xsp/custom</namespace-uri>
+    <default-prefix>xc</default-prefix>
+  </faces-config-extension>
+  <composite-component>
+    <component-type>formActionButtons</component-type>
+    <composite-name>formActionButtons</composite-name>
+    <composite-file>/formActionButtons.xsp</composite-file>
+    <composite-extension>
+      <designer-extension>
+        <in-palette>true</in-palette>
+      </designer-extension>
+    </composite-extension>
+    <property>
+      <property-name>linkBack</property-name>
+      <property-class>string</property-class>
+      <description>Link to use when user cancels, closes or deletes the current document</description>
+    </property>
+  </composite-component>
+</faces-config>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom" pageTitle="Company">
+	<xp:this.acl>
+		<xp:acl>
+			<xp:this.entries>
+				<xp:aclEntry right="EDITOR" type="ROLE" loaded="true">
+					<xp:this.name><![CDATA[[administrator]]]></xp:this.name>
+				</xp:aclEntry>
+			</xp:this.entries>
+		</xp:acl>
+	</xp:this.acl>
+
+	<xp:this.dataContexts>
+		<xp:dataContext var="viewName" value="companies"></xp:dataContext>
+		<xp:dataContext var="documentName" value="company"></xp:dataContext>
+	</xp:this.dataContexts>
+
+	<xp:panel disableOutputTag="true">
+		<xp:this.data>
+			<xp:dominoDocument var="document1" formName="#{documentName}" action="editDocument"
+				computeWithForm="both">
+			</xp:dominoDocument>
+		</xp:this.data>
+
+		<xc:_layout selectedMenuItem="#{viewName}" pageTitle="#{javascript:@ProperCase(documentName)}"
+			pageSubtitle="#{javascript:if (document1.isNewNote()) {'New ' + documentName} else {document1.getItemValueString('name')}}">
+
+
+			<xp:this.facets>
+				<xp:panel xp:key="headerButtons">
+				</xp:panel>
+
+				<xp:panel xp:key="body">
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="form-horizontal">
+								<div class="form-group">
+									<xp:label value="Name *" for="name" styleClass="col-lg-2"></xp:label>
+									<div class="col-lg-10">
+										<xp:inputText id="name" value="#{document1.name}" required="true">
+											<xp:this.attrs>
+												<xp:attr name="placeholder" value="Company name"></xp:attr>
+											</xp:this.attrs>
+											<xp:this.validators>
+												<xp:validateRequired message="Can't have a company without a name"></xp:validateRequired>
+											</xp:this.validators>
+										</xp:inputText>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<xp:label value="Address" for="address" styleClass="col-lg-2"></xp:label>
+									<div class="col-lg-10">
+										<xp:inputText id="address" value="#{document1.address}">
+											<xp:this.attrs>
+												<xp:attr name="placeholder" value="Street and housenumber"></xp:attr>
+											</xp:this.attrs>
+										</xp:inputText>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<xp:label value="Zipcode" for="zipcode" styleClass="col-lg-2"></xp:label>
+									<div class="col-lg-10">
+										<xp:inputText id="zipcode" value="#{document1.zipcode}">
+											<xp:this.attrs>
+												<xp:attr name="placeholder" value="Zipcode"></xp:attr>
+											</xp:this.attrs>
+										</xp:inputText>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<xp:label value="City" for="city" styleClass="col-lg-2"></xp:label>
+									<div class="col-lg-10">
+										<xp:inputText id="city" value="#{document1.city}">
+											<xp:this.attrs>
+												<xp:attr name="placeholder" value="City"></xp:attr>
+											</xp:this.attrs>
+										</xp:inputText>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<xp:label value="Website" for="websiteUrl" styleClass="col-lg-2"></xp:label>
+									<div class="col-lg-10">
+										<xp:inputText id="websiteUrl" value="#{document1.websiteUrl}">
+											<xp:this.attrs>
+												<xp:attr name="placeholder" value="http://"></xp:attr>
+											</xp:this.attrs>
+										</xp:inputText>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<xp:label value="Route informatie" for="routeInfo" styleClass="col-lg-2"></xp:label>
+									<div class="col-lg-10">
+										<xp:inputTextarea id="routeInfo" value="#{document1.routeInfo}">
+											<xp:this.attrs>
+												<xp:attr name="placeholder" value="Directions for the route or reception procedure"></xp:attr>
+											</xp:this.attrs>
+										</xp:inputTextarea>
+									</div>
+								</div>
+							
+<!--								<div class="form-group">-->
+<!--									<xp:label value="Maps HTML" for="mapsHtml" styleClass="col-lg-2"></xp:label>-->
+<!--									<div class="col-lg-10">-->
+<!--										<xp:inputTextarea id="mapsHtml" value="#{document1.mapsHtml}">-->
+<!--											<xp:this.attrs>-->
+<!--												<xp:attr name="placeholder" value="HTML as copied from Google Maps"></xp:attr>-->
+<!--											</xp:this.attrs>-->
+<!--										</xp:inputTextarea>-->
+<!--										<div>Set the width of the iframe to "100%" so it scales to the device.</div>-->
+<!--									</div>-->
+<!--								</div>-->
+							
+								<xc:formActionButtons></xc:formActionButtons>
+							</div>
+						</div>
+					</div>
+				</xp:panel>
+
+			</xp:this.facets>
+		</xc:_layout>
+	</xp:panel>
+</xp:view>

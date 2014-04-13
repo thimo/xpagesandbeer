@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="filter" maintenanceversion="1.0" replicaid="C1257AF2006A18BE" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="41a" sequence="4" unid="6AB2EC765F4F146FC1257C370066FB2D">
+<created><datetime>20131204T194449,73+01</datetime></created>
+<modified><datetime dst="true">20140413T205805,82+02</datetime></modified>
+<revised><datetime>20140117T094125,28+01</datetime></revised>
+<lastaccessed><datetime dst="true">20140413T205805,82+02</datetime></lastaccessed>
+<addedtofile><datetime dst="true">20140413T205805,82+02</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Thimo Jansen/O=TJit</name><name>CN=Thimo Jansen/O=WEBCITC</name></updatedby>
+<wassignedby><name>CN=Thimo Jansen/O=WEBCITC</name></wassignedby>
+<item name="$TITLE" sign="true"><text>xpDebugToolbar</text></item>
+<item name="$Flags"><text>.5834Q</text></item>
+<item name="$PublicAccess" sign="true"><text>1</text></item>
+<item name="$DesignerVersion"><text>8.5.3</text></item>
+</note>

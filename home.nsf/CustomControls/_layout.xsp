@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+
+	<xp:this.beforePageLoad><![CDATA[#{javascript:
+if (context.getLocale() != settings.locale_language && context.getLocale() != settings.locale_language + '_' + settings.locale_country) {
+	context.setLocale(new Locale(settings.locale_language, settings.locale_country));
+	context.reloadPage();
+}
+}]]></xp:this.beforePageLoad>
+
+	<div>
+		<div class="hero-bg ${compositeData.bigHeroBox ? 'hero-big' : ''}">
+
+			<div class="section header">
+				<div class="w-container">
+					<div class="w-row">
+						<div class="w-col w-col-5 company-column">
+							<div class="company-title">
+								<xp:link escape="true" text="#{content.title}" value="${facesContext.externalContext.requestContextPath}"></xp:link>
+							</div>
+						</div>
+						<div class="w-col w-col-7 nav-bar">
+							<a class="nav-link" href="${facesContext.externalContext.requestContextPath}#page-nav-meetup" target="_self">Meetup</a>
+							<a class="nav-link" href="${facesContext.externalContext.requestContextPath}#page-nav-archive" target="_self">Archief</a>
+							<a class="nav-link" href="${facesContext.externalContext.requestContextPath}#page-nav-calendar" target="_self">Kalender</a>
+							<!--
+								<a class="nav-link sign-up" href="mailto:support@webflow.com?subject=Sign me up!" target="_blank">Aanmelden</a>
+							-->
+							<xp:link styleClass="nav-link sign-up" escape="true" text="Aanmelden" value="/aanmelden.xsp"></xp:link>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<xp:panel styleClass="w-container" loaded="${not empty compositeData.bigHeroBox}">
+				<xp:text escape="false" tagName="h1" value="#{content.brandpromise}" styleClass=""></xp:text>
+				<xp:text escape="false" tagName="div" value="#{content.brandpromise_sub}" styleClass="subtitle"></xp:text>
+			</xp:panel>
+		</div>
+	</div>
+
+	<xp:callback facetName="body" id="callbackBody"></xp:callback>
+
+	<div class="section grey">
+		<div class="w-container">
+			<div class="w-row">
+				<div class="w-col w-col-6 left-footer-col">
+					<div class="footer-text">
+						©&#160;
+						<xp:text escape="true" value="#{content.title}"></xp:text>
+						.&#160;
+						<xp:text escape="true" value="#{content.brandpromise_sub}"></xp:text>
+					</div>
+				</div>
+				<div class="w-col w-col-6 footer-nav-bar">
+					<xp:link escape="true" text="Contact" styleClass="footer-link" value="/contact.xsp"></xp:link>
+					<xp:link escape="true" text="Met dank aan" styleClass="footer-link" value="/bedankt.xsp"></xp:link>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="section">
+	</div>
+
+	<script src="${facesContext.externalContext.requestContextPath}/js/jquery-1.10.2.min.js"></script>
+	<script src="${facesContext.externalContext.requestContextPath}/js/webflow.js"></script>
+
+</xp:view>

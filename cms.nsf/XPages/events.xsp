@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom" pageTitle="Events">
+	<xp:this.acl>
+		<xp:acl>
+			<xp:this.entries>
+				<xp:aclEntry right="EDITOR" type="ROLE" loaded="true">
+					<xp:this.name><![CDATA[[administrator]]]></xp:this.name>
+				</xp:aclEntry>
+			</xp:this.entries>
+		</xp:acl>
+	</xp:this.acl>
+
+	<xp:this.dataContexts>
+		<xp:dataContext var="viewName" value="events"></xp:dataContext>
+		<xp:dataContext var="documentName" value="event"></xp:dataContext>
+	</xp:this.dataContexts>
+
+	<xc:_layout selectedMenuItem="#{viewName}" pageTitle="#{javascript:@ProperCase(viewName)}" pageSubtitle="">
+		<xp:this.facets>
+			<xp:panel xp:key="headerButtons" disableOutputTag="true">
+				<xp:link styleClass="btn btn-default" escape="true" text="Add #{documentName}" value="/#{documentName}.xsp?action=newDocument"></xp:link>
+			</xp:panel>
+
+			<xp:panel xp:key="body">
+				<xp:panel disableOutputTag="true">
+					<xp:this.data>
+						<xp:dominoView var="view1" viewName="#{viewName}"></xp:dominoView>
+					</xp:this.data>
+
+					<table class="table table-striped table-hover">
+						<thead>
+							<tr>
+								<!--								<th>#</th>-->
+								<th>Date</th>
+								<th>Location</th>
+								<th>Topics</th>
+							</tr>
+						</thead>
+						<tbody>
+							<xp:repeat id="repeat1" rows="60" value="#{view1}" var="row" indexVar="index">
+								<tr>
+									<td>
+										<xp:link escape="true" value="/#{documentName}.xsp" styleClass="#{row.status}">
+											<xp:this.parameters>
+												<xp:parameter name="documentId" value="#{row.unid}"></xp:parameter>
+											</xp:this.parameters>
+											<xp:text escape="true" value="#{row.date}">
+												<xp:this.converter>
+													<xp:convertDateTime pattern="d MMMM yyyy"></xp:convertDateTime>
+												</xp:this.converter>
+											</xp:text>
+											<xp:text value="Unknown date" rendered="#{empty row.date}" style="font-style: italic;"></xp:text>
+										</xp:link>
+									</td>
+									<td>
+										<xp:text
+											value="#{javascript:
+var company = database.getDocumentByUNID(row.getColumnValue('companyId'));
+var name = company.getItemValueString('name');
+var city = company.getItemValueString('city');
+return !!city ? name + ', ' + city : name ;
+}"
+											rendered="#{!empty row.companyId}"></xp:text>
+									</td>
+									<td>
+										<xp:panel disableOutputTag="true">
+											<xp:this.dataContexts>
+												<xp:dataContext var="viewName" value="topics"></xp:dataContext>
+												<xp:dataContext var="documentName" value="topic"></xp:dataContext>
+											</xp:this.dataContexts>
+
+											<xp:panel disableOutputTag="true">
+												<xp:this.data>
+													<xp:dominoView var="view1" viewName="#{viewName}" keys="#{row.unid}" keysExactMatch="true">
+													</xp:dominoView>
+												</xp:this.data>
+
+												<xp:repeat id="topics" rows="60" value="#{view1}" var="row" indexVar="index">
+													<div>
+														<xp:link escape="true" value="/#{documentName}.xsp" styleClass="defaultColor">
+															<xp:this.parameters>
+																<xp:parameter name="documentId" value="#{row.unid}"></xp:parameter>
+															</xp:this.parameters>
+															<xp:text escape="true">
+																<xp:this.value><![CDATA[#{row.startTime}]]></xp:this.value>
+																<xp:this.converter>
+																	<xp:convertDateTime pattern="HH:mm"></xp:convertDateTime>
+																</xp:this.converter>
+															</xp:text>
+															&#160;&#160;
+															<xp:text escape="true" value="#{row.title}"></xp:text>
+															<xp:text value="Unknown title" rendered="#{empty row.title}" style="font-style: italic;">
+															</xp:text>
+														</xp:link>
+
+														<xp:span rendered="#{!empty row.personId}">
+															&#160;-&#160;
+															<xp:text escape="true">
+																<xp:this.value><![CDATA[#{javascript:
+var personDoc = database.getDocumentByUNID(row.getColumnValue('personId'));
+return personDoc.getItemValueString('name');
+}]]></xp:this.value>
+															</xp:text>
+														</xp:span>
+													</div>
+												</xp:repeat>
+												<xp:div style="font-style: italic;" rendered="#{javascript:getComponent('repeat1').getRowCount() == 0}">No topics found</xp:div>
+											</xp:panel>
+										</xp:panel>
+									</td>
+								</tr>
+							</xp:repeat>
+						</tbody>
+					</table>
+				</xp:panel>
+
+			</xp:panel>
+		</xp:this.facets>
+	</xc:_layout>
+</xp:view>

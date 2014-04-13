@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='utf-8'?>
+<form name='company' xmlns='http://www.lotus.com/dxl' version='9.0' maintenanceversion='1.0'
+ replicaid='C1257BFA0065FC44' hide='web' publicaccess='false' designerversion='8.5.3'
+ renderpassthrough='true'>
+<noteinfo noteid='3aa' unid='F54DD054363BB1F7C1257C010026E22D' sequence='19'>
+<created><datetime dst='true'>20131011T090442,69+02</datetime></created>
+<modified><datetime dst='true'>20140413T205839,74+02</datetime></modified>
+<revised><datetime>20140130T115018,23+01</datetime></revised>
+<lastaccessed><datetime dst='true'>20140413T205839,74+02</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20140413T205839,74+02</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Thimo Jansen/O=WEBCITC</name></updatedby>
+<wassignedby><name>CN=Thimo Jansen/O=WEBCITC</name></wassignedby>
+<body><richtext>
+<pardef id='1'/>
+<par def='1'>company</par>
+<par def='1'>	id	<field type='text' kind='computedwhencomposed' name='id'><code
+ event='defaultvalue'><formula>@Text( @DocumentUniqueID )</formula></code></field><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par>
+<par def='1'>	name	<field type='text' kind='editable' name='name'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par>
+<par def='1'>	address	<field type='text' kind='editable' name='address'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par>
+<par def='1'>	zipcode	<field type='text' kind='editable' name='zipcode'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par>
+<par def='1'>	city	<field type='text' kind='editable' name='city'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par>
+<par def='1'>	websiteUrl	<field type='text' kind='editable' name='websiteUrl'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par>
+<par def='1'>	routeInfo	<field type='text' kind='editable' name='routeInfo'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par>
+<par def='1'>	logoImage	<field type='richtext' kind='editable' name='logoImage'
+ storageformat='htmlmime'/><compositedata type='98' prevtype='65418' nexttype='222'
+ afterparcount='6' containertype='65418' aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAEAAAA=
+</compositedata></par></richtext></body>
+<item name='$$ScriptName' summary='false' sign='true'><text>company</text></item></form>
+

@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom" pageTitle="Person">
+	<xp:this.acl>
+		<xp:acl>
+			<xp:this.entries>
+				<xp:aclEntry right="EDITOR" type="ROLE" loaded="true">
+					<xp:this.name><![CDATA[[administrator]]]></xp:this.name>
+				</xp:aclEntry>
+			</xp:this.entries>
+		</xp:acl>
+	</xp:this.acl>
+
+	<xp:this.dataContexts>
+		<xp:dataContext var="viewName" value="persons"></xp:dataContext>
+		<xp:dataContext var="documentName" value="person"></xp:dataContext>
+	</xp:this.dataContexts>
+
+	<xp:panel disableOutputTag="true">
+		<xp:this.data>
+			<xp:dominoDocument var="document1" formName="#{documentName}" action="editDocument"
+				computeWithForm="both">
+			</xp:dominoDocument>
+		</xp:this.data>
+
+		<xc:_layout selectedMenuItem="#{viewName}" pageTitle="#{javascript:@ProperCase(documentName)}"
+			pageSubtitle="#{javascript:if (document1.isNewNote()) {'New ' + documentName} else {document1.getItemValueString('title')}}">
+
+			<xp:this.facets>
+				<xp:panel xp:key="headerButtons">
+				</xp:panel>
+
+				<xp:panel xp:key="body">
+					<div class="row">
+						<div class="col-lg-8">
+							<div class="form-horizontal">
+								<div class="form-group">
+									<xp:label value="Name *" for="name" styleClass="col-lg-2"></xp:label>
+									<div class="col-lg-10">
+										<xp:inputText id="name" value="#{document1.name}" required="true">
+											<xp:this.attrs>
+												<xp:attr name="placeholder" value="John Doe"></xp:attr>
+											</xp:this.attrs>
+
+											<xp:this.validators>
+												<xp:validateRequired message="Please add a name. A person's gotta have one."></xp:validateRequired>
+											</xp:this.validators>
+										</xp:inputText>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<xp:label value="Company" for="companyId" styleClass="col-lg-2"></xp:label>
+									<div class="col-lg-10">
+										<xp:comboBox id="companyId" value="#{document1.companyId}">
+											<xp:this.attrs>
+												<xp:attr name="placeholder" value="Select a company"></xp:attr>
+											</xp:this.attrs>
+											<xp:selectItem itemLabel="" itemValue=""></xp:selectItem>
+											<xp:selectItems>
+												<xp:this.value><![CDATA[#{javascript:dbColumnArray("", "", "companies", 8, {cache:settings.cache_enabled})}]]></xp:this.value>
+											</xp:selectItems>
+										</xp:comboBox>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<xp:label value="Job title" for="jobtitle" styleClass="col-lg-2"></xp:label>
+									<div class="col-lg-10">
+										<xp:inputText id="jobtitle" value="#{document1.jobtitle}">
+											<xp:this.attrs>
+												<xp:attr name="placeholder" value="Manager. Everybody is a manager, right?"></xp:attr>
+											</xp:this.attrs>
+										</xp:inputText>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<xp:label value="Biography" for="bio" styleClass="col-lg-2"></xp:label>
+									<div class="col-lg-10">
+										<xp:inputTextarea id="bio" value="#{document1.bio}">
+											<xp:this.attrs>
+												<xp:attr name="placeholder" value="Be nice"></xp:attr>
+											</xp:this.attrs>
+										</xp:inputTextarea>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<xp:label value="Email" for="email" styleClass="col-lg-2"></xp:label>
+									<div class="col-lg-10">
+										<xp:inputText id="email" value="#{document1.email}">
+											<xp:this.attrs>
+												<xp:attr name="placeholder" value="foo@bar.com"></xp:attr>
+											</xp:this.attrs>
+										</xp:inputText>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<xp:label value="Twitter name" for="twitterName" styleClass="col-lg-2"></xp:label>
+									<div class="col-lg-10">
+										<div class="input-group">
+											<span class="input-group-addon">@</span>
+											<xp:inputText id="twitterName" value="#{document1.twitterName}">
+												<xp:this.attrs>
+													<xp:attr name="placeholder" value="tweet"></xp:attr>
+												</xp:this.attrs>
+											</xp:inputText>
+										</div>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<xp:label value="LinkedIn" for="linkedinUrl" styleClass="col-lg-2"></xp:label>
+									<div class="col-lg-10">
+										<xp:inputText id="linkedinUrl" value="#{document1.linkedinUrl}">
+											<xp:this.attrs>
+												<xp:attr name="placeholder" value="http://www.linkedin.com/in/john.doe"></xp:attr>
+											</xp:this.attrs>
+										</xp:inputText>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<xp:label value="Blog" for="blogUrl" styleClass="col-lg-2"></xp:label>
+									<div class="col-lg-10">
+										<xp:inputText id="blogUrl" value="#{document1.blogUrl}">
+											<xp:this.attrs>
+												<xp:attr name="placeholder" value="http://www.myblog.com or a personal site"></xp:attr>
+											</xp:this.attrs>
+										</xp:inputText>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<xp:label value="Photo" for="photo" styleClass="col-lg-2"></xp:label>
+									<div class="col-lg-10">
+										<div class="fileinput fileinput-new" data-provides="fileinput">
+											<div class="input-group">
+												<div class="form-control uneditable-input span3" data-trigger="fileinput">
+													<i class="glyphicon glyphicon-file fileinput-exists"></i>
+													<span class="fileinput-filename"></span>
+												</div>
+												<span class="input-group-addon btn btn-default btn-file">
+													<span class="fileinput-new">Select file</span>
+													<span class="fileinput-exists">Change</span>
+													<xp:fileUpload id="photo" value="#{document1.photo}">
+														<xp:eventHandler event="onchange" submit="true" refreshMode="complete" disableValidators="true">
+														</xp:eventHandler>
+													</xp:fileUpload>
+												</span>
+												<a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+											</div>
+										</div>
+										<xp:fileDownload rows="30" id="fileDownload1" displayLastModified="false" value="#{document1.photo}"
+											displaySize="false" displayType="false" displayCreated="false" allowDelete="true" hideWhen="true">
+										</xp:fileDownload>
+									</div>
+								</div>
+
+								<xc:formActionButtons></xc:formActionButtons>
+							</div>
+						</div>
+					</div>
+				</xp:panel>
+			</xp:this.facets>
+		</xc:_layout>
+
+		<xp:scriptBlock type="text/javascript">
+			<xp:this.value><![CDATA[
+$(function() {
+	x$('#{id:companyId}').select2({
+			allowClear: true
+	});
+	//$('.fileinput').fileinput();
+});
+]]></xp:this.value>
+		</xp:scriptBlock>
+	</xp:panel>
+</xp:view>

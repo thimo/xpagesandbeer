@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom" pageTitle="Aanmelden"
+	createForm="true">
+	<xp:this.resources>
+		<xp:script src="/utils" clientSide="false"></xp:script>
+		<xp:bundle src="/settings.properties" var="settings"></xp:bundle>
+	</xp:this.resources>
+
+	<xc:_layout>
+		<xp:this.facets>
+			<xp:panel xp:key="body" disableOutputTag="true">
+				<xp:this.data>
+					<xp:dominoDocument var="registration" formName="registration" computeWithForm="onsave">
+						<xp:this.databaseName><![CDATA[${javascript:settings.cms_db
+}]]></xp:this.databaseName>
+					</xp:dominoDocument>
+					<xp:dominoDocument var="event" databaseName="#{settings.cms_db}" action="openDocument"
+						ignoreRequestParams="true">
+						<xp:this.documentId><![CDATA[${javascript:
+return dbColumnArray("", settings.cms_db, "eventsActive", 7, {cache:settings.cache_enabled})[0];
+}]]></xp:this.documentId>
+					</xp:dominoDocument>
+				</xp:this.data>
+
+				<xp:panel styleClass="section">
+					<xp:this.dataContexts>
+						<xp:dataContext var="eventInFuture">
+							<xp:this.value><![CDATA[${javascript:event.getItemValueDate('date').getTime() >= (new Date()).getTime()}]]></xp:this.value>
+						</xp:dataContext>
+						<xp:dataContext var="subscriptionsOverLimit">
+							<xp:this.value><![CDATA[${javascript:
+var limit = event.getItemValueDouble('limit');
+if (limit == 0.0) {
+	return false;
+} else {
+	var registrations = dbLookupArray("", settings.cms_db, "registrations", event.getDocument().getUniversalID(), 2, {cache:false});
+	if (!registrations) {
+		return false;
+	} else {
+		return (registrations.length >= limit);
+	}
+}
+}]]></xp:this.value>
+						</xp:dataContext>
+					</xp:this.dataContexts>
+
+					<div class="w-container">
+						<div class="w-row">
+							<div class="w-col w-col-7">
+								<xc:_page page_name="event_registration_open" header_tagname="h3">
+									<xp:this.rendered><![CDATA[#{eventInFuture and not subscriptionsOverLimit}]]></xp:this.rendered>
+								</xc:_page>
+
+								<xp:panel disableOutputTag="true">
+									<xp:this.rendered><![CDATA[#{eventInFuture and subscriptionsOverLimit}]]></xp:this.rendered>
+									<xp:this.data>
+										<xp:dominoDocument var="contactPerson" action="openDocument" ignoreRequestParams="true">
+											<xp:this.databaseName><![CDATA[#{settings.cms_db}]]></xp:this.databaseName>
+											<xp:this.documentId><![CDATA[#{event.personId}]]></xp:this.documentId>
+										</xp:dominoDocument>
+									</xp:this.data>
+
+									<xc:_page page_name="event_registration_over_limit" header_tagname="h3">
+									</xc:_page>
+
+									<p>
+										Contactpersoon:&#160;
+										<xp:link escape="true" text="#{contactPerson.name}" value="mailto:#{contactPerson.email}"></xp:link>
+									</p>
+								</xp:panel>
+
+								<xc:_page page_name="event_registration_closed" header_tagname="h3">
+									<xp:this.rendered><![CDATA[#{not eventInFuture}]]></xp:this.rendered>
+								</xc:_page>
+							</div>
+						</div>
+
+						<div class="w-row">
+							<div class="w-col w-col-7">
+								<xp:panel>
+									<xp:this.readonly><![CDATA[#{not eventInFuture or subscriptionsOverLimit}]]></xp:this.readonly>
+									<xp:this.data>
+										<xp:dominoDocument var="eventCompany" action="openDocument" ignoreRequestParams="true">
+											<xp:this.databaseName><![CDATA[#{settings.cms_db}]]></xp:this.databaseName>
+											<xp:this.documentId><![CDATA[#{event.companyId}]]></xp:this.documentId>
+										</xp:dominoDocument>
+									</xp:this.data>
+
+									<xp:messages id="messages1" styleClass="alert alert-danger"></xp:messages>
+
+									<xp:div styleClass="alert alert-success" rendered="#{javascript:!registration.isEditable();}">
+										Bedankt voor je aanmelding, we zien je bij de volgende
+										meetup.
+									</xp:div>
+
+									<xp:inputHidden id="eventId" value="#{registration.eventId}" defaultValue="#{javascript:event.getDocument().getUniversalID();}">
+									</xp:inputHidden>
+
+									<div class="w-checkbox">
+										<strong>
+											<xp:text escape="true" value="#{event.date}">
+												<xp:this.converter>
+													<xp:convertDateTime pattern="d MMMM yyyy"></xp:convertDateTime>
+												</xp:this.converter>
+											</xp:text>
+										</strong>
+										<xp:panel loaded="${not empty event.companyId}" disableOutputTag="true">
+											&#160;bij&#160;
+											<strong>
+												<xp:text escape="true" value="#{eventCompany.name}"></xp:text>
+											</strong>
+											,&#160;
+											<xp:text escape="true" value="#{eventCompany.city}"></xp:text>
+										</xp:panel>
+									</div>
+
+									<xp:label value="Naam *" for="name"></xp:label>
+									<xp:inputText id="name" value="#{registration.name}" required="true" styleClass="w-input"
+										showReadonlyAsDisabled="true">
+										<xp:this.attrs>
+											<xp:attr name="placeholder" value="Vul je naam in"></xp:attr>
+										</xp:this.attrs>
+										<xp:this.validators>
+											<xp:validateRequired message="Vul je naam in"></xp:validateRequired>
+										</xp:this.validators>
+									</xp:inputText>
+
+									<xp:label value="Emailadres *" for="email"></xp:label>
+									<xp:inputText id="email" value="#{registration.email}" required="true" styleClass="w-input"
+										showReadonlyAsDisabled="true">
+										<xp:this.attrs>
+											<xp:attr name="placeholder" value="xpages@beer.nl"></xp:attr>
+										</xp:this.attrs>
+										<xp:this.validators>
+											<xp:validateRequired message="Vul je emailadres in"></xp:validateRequired>
+
+											<xp:validateConstraint message="Vul een geldig emailadres in">
+												<xp:this.regex><![CDATA[^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$]]></xp:this.regex>
+											</xp:validateConstraint>
+										</xp:this.validators>
+									</xp:inputText>
+
+									<xp:label value="Organisatie" for="company"></xp:label>
+									<xp:inputText id="company" value="#{registration.company}" styleClass="w-input"
+										showReadonlyAsDisabled="true">
+										<xp:this.attrs>
+											<xp:attr name="placeholder" value="Waar werk je?"></xp:attr>
+										</xp:this.attrs>
+									</xp:inputText>
+
+									<xp:label value="Functie" for="jobtitle"></xp:label>
+									<xp:inputText id="jobtitle" value="#{registration.jobtitle}" styleClass="w-input"
+										showReadonlyAsDisabled="true">
+										<xp:this.attrs>
+											<xp:attr name="placeholder" value="Je rol of functie"></xp:attr>
+										</xp:this.attrs>
+									</xp:inputText>
+
+									<xp:label value="Telefoonnummer" for="phonenumber"></xp:label>
+									<xp:inputText id="phonenumber" value="#{registration.phonenumber}" styleClass="w-input"
+										showReadonlyAsDisabled="true">
+										<xp:this.attrs>
+											<xp:attr name="placeholder" value="012-3456789"></xp:attr>
+										</xp:this.attrs>
+									</xp:inputText>
+
+									<xp:label value="Opmerkingen" for="remarks"></xp:label>
+									<xp:inputTextarea id="remarks" value="#{registration.remarks}" styleClass="w-input" style="height: 120px;"
+										showReadonlyAsDisabled="true">
+										<xp:this.attrs>
+											<xp:attr name="placeholder" value="Opmerkingen of vragen? Laat ze hier achter.">
+											</xp:attr>
+										</xp:this.attrs>
+									</xp:inputTextarea>
+
+									<div class="w-checkbox">
+										<xp:checkBox text="Hou me op de hoogte" id="mailinglist" value="#{registration.mailinglist}"
+											defaultChecked="true" checkedValue="1" uncheckedValue="0">
+										</xp:checkBox>
+										<div style="margin-left: 24px;">
+											We sturen je zo af en toe een email over XPages &amp; Beer meetups. Je kunt
+											je ieder moment
+											eenvoudig afmelden.
+										</div>
+									</div>
+
+									<xp:button value="Versturen" styleClass="w-button button" id="versturen"
+										rendered="#{javascript:registration.isEditable();}">
+										<xp:this.disabled><![CDATA[#{javascript:event.getItemValueDate('date').getTime() < (new Date()).getTime()}]]></xp:this.disabled>
+
+										<xp:eventHandler event="onclick" submit="true" refreshMode="complete" immediate="false" save="false">
+											<xp:this.action>
+												<xp:actionGroup>
+													<xp:saveDocument var="registration"></xp:saveDocument>
+
+													<xp:executeScript>
+														<xp:this.script><![CDATA[#{javascript:
+if (registration.getItemValueString('mailinglist') == '1') {
+	try {
+		var email = registration.getItemValueString('email');
+		var name = registration.getItemValueString('name');
+		nl.xpagesandbeer.MailChimp.subscribe(email, name);
+	} catch(e) {
+		print(e);
+	}
+}
+nl.xpagesandbeer.Mail.sendRegistrationThankyou(registration.getDocument(), event.getDocument());}]]></xp:this.script>
+													</xp:executeScript>
+													<xp:openPage target="openDocument" name="/aanmelden.xsp"
+														documentId="#{javascript:registration.getDocument().getUniversalID()}">
+													</xp:openPage>
+												</xp:actionGroup>
+											</xp:this.action>
+											<xp:this.script><![CDATA[x$('#{id:versturen}').html('Een moment...').attr("disabled", "disabled");]]></xp:this.script>
+										</xp:eventHandler>
+									</xp:button>
+
+									<xp:div style="margin: 20px 0;" rendered="#{javascript:registration.isEditable();}">
+										*) Verplicht in te vullen
+									</xp:div>
+								</xp:panel>
+							</div>
+							<div class="w-col w-col-5"></div>
+						</div>
+					</div>
+
+				</xp:panel>
+			</xp:panel>
+		</xp:this.facets>
+	</xc:_layout>
+
+	<xp:scriptBlock type="text/javascript">
+		<xp:this.value><![CDATA[ 
+function x$(idTag, param) {
+	idTag=idTag.replace(/:/gi, "\\:")+(param ? param : "");
+	return($("#"+idTag));
+}
+]]></xp:this.value>
+	</xp:scriptBlock>
+</xp:view>

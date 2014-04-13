@@ -1,0 +1,184 @@
+
+	<!--
+		The default theme contents use theme inheritance. Application themes can extend an existing global theme using the
+		extends attribute. Existing themes include the following options: 1. webstandard 2. oneui 3. notes
+	-->
+<theme extends="" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="platform:/plugin/com.ibm.designer.domino.stylekits/schema/stylekit.xsd">
+	<!--
+		Use this pattern to include resources (such as style sheets and JavaScript files that are used by this theme.
+	-->
+
+	<resources>
+		<styleSheet href="/bootstrap/css/bootstrap.min.css"></styleSheet>
+		<styleSheet href="/bootstrap/extend/css/jasny-bootstrap.min.css"></styleSheet>
+		<styleSheet href="/css/bootstrap-spacelab.min.css"></styleSheet>
+		<styleSheet href="/plugins/select2/select2.css"></styleSheet>
+		<styleSheet href="/plugins/select2/select2-bootstrap3.css"></styleSheet>
+		<styleSheet href="/plugins/datepicker/css/datepicker.css"></styleSheet>
+		<styleSheet href="/custom.css"></styleSheet>
+
+		<bundle>
+			<src>/settings.properties</src>
+			<var>settings</var>
+		</bundle>
+
+		<!--		<styleSheet rendered="#{javascript:context.getUserAgent().isIE(6,8)}" href="/style-ie.css"></styleSheet>-->
+<!---->
+		<!--		<script clientSide="true"-->
+		<!--
+			contents="document.createElement('header');document.createElement('hgroup');document.createElement('nav');document.createElement('menu');document.createElement('section');document.createElement('article');document.createElement('aside');document.createElement('footer');">
+		-->
+		<!--		</script>-->
+
+		<script src="/utils.jss"></script>
+		<script clientSide="true" src="/utils.js"></script>
+	</resources>
+
+	<!--	<resource>-->
+	<!--		<content-type>text/css</content-type>-->
+	<!--		<href>bootstrap/css/bootstrap.min.css</href>-->
+	<!--	</resource>-->
+<!---->
+	<!--	<resource>-->
+	<!--		<content-type>text/css</content-type>-->
+	<!--		<href>css/bootstrap-spacelab.min.css</href>-->
+	<!--	</resource>-->
+<!---->
+	<!--	<resource>-->
+	<!--		<content-type>text/css</content-type>-->
+	<!--		<href>custom.css</href>-->
+	<!--	</resource>-->
+	<!--		<resource>-->
+	<!--		<content-type>text/css</content-type>-->
+	<!--		<href>bootstrap/css/bootstrap-responsive.min.css</href>-->
+	<!--	</resource>-->
+
+	<!--
+		Use this pattern to define property name/value pairs for controls
+	-->
+	<!--
+		<control> <name>[Control Name]</name> <property> <name>[property Name]</name> <value>[property Value]</value>
+		</property> </control>
+	-->
+
+	<control>
+		<name>Button.Command</name>
+		<property mode="concat">
+			<name>styleClass</name>
+			<value>btn btn-default</value>
+		</property>
+	</control>
+	
+	<control>
+		<name>Button</name>
+		<property mode="concat">
+			<name>styleClass</name>
+			<value>btn btn-default</value>
+		</property>
+	</control>
+
+	<control>
+		<name>Button.Submit</name>
+		<property mode="concat">
+			<name>styleClass</name>
+			<value>btn btn-default</value>
+		</property>
+		<property>
+			<name>type</name>
+			<value>submit</value>
+		</property>
+	</control>
+
+	<control>
+		<name>ListBox</name>
+		<property mode="concat">
+			<name>styleClass</name>
+			<value>form-control</value>
+		</property>
+	</control>
+
+	<control>
+		<name>ComboBox</name>
+		<property mode="concat">
+			<name>styleClass</name>
+			<value>form-control</value>
+		</property>
+	</control>
+
+	<control>
+		<name>Link</name>
+		<property>
+			<name>styleClass</name>
+			<value></value>
+		</property>
+	</control>
+
+	<control>
+		<name>Text.ComputedField</name>
+		<property>
+			<name>styleClass</name>
+			<value></value>
+		</property>
+	</control>
+
+	<control>
+		<name>Form</name>
+		<property>
+			<name>styleClass</name>
+			<value></value>
+		</property>
+	</control>
+
+	<control>
+		<name>Text.Label</name>
+		<property mode="concat">
+			<name>styleClass</name>
+			<value>control-label</value>
+		</property>
+	</control>
+
+	<control>
+		<name>InputField.EditBox</name>
+		<property>
+			<name>styleClass</name>
+			<value>form-control</value>
+		</property>
+	</control>
+
+	<control>
+		<name>InputField.Secret</name>
+		<property>
+			<name>styleClass</name>
+			<value>form-control</value>
+		</property>
+	</control>
+
+	<control>
+		<name>InputField.TextArea</name>
+		<property>
+			<name>styleClass</name>
+			<value>form-control</value>
+		</property>
+	</control>
+
+	<control>
+		<name>ViewRoot</name>
+		<property>
+			<name>pageIcon</name>
+			<value>/favicon.ico</value>
+		</property>
+		<property mode="concat">
+			<name>pageTitle</name>
+			<value> - XPages &amp; Beer CMS</value>
+		</property>
+		<property>
+			<name>ignoreRequestParams</name>
+			<value>false</value>
+		</property>
+		<property>
+			<name>createForm</name>
+			<value>true</value>
+		</property>
+	</control>
+
+</theme>

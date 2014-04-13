@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+	<xp:this.dataContexts>
+		<xp:dataContext var="linkBack">
+			<xp:this.value><![CDATA[#{javascript:
+if (!!compositeData.linkBack) {
+	return compositeData.linkBack;
+} else {
+	return "/" + viewName + ".xsp";
+}
+}]]></xp:this.value>
+		</xp:dataContext>
+	</xp:this.dataContexts>
+	
+	<div class="form-group">
+		<div class="col-lg-10 col-lg-offset-2">
+			<div class="btn-toolbar">
+				<div class="pull-right">
+					<xp:button value="Remove" id="button3" styleClass="btn-danger"
+						rendered="#{javascript:!document1.isNewNote()}">
+						<xp:eventHandler event="onclick" submit="true" refreshMode="complete" save="false"
+							immediate="true">
+							<xp:this.action>
+								<xp:deleteDocument name="#{linkBack}"
+									message="#{javascript:@ProperCase(documentName)} will be removed. Continue?" var="document1">
+								</xp:deleteDocument>
+							</xp:this.action>
+						</xp:eventHandler>
+					</xp:button>
+				</div>
+
+				<xp:div styleClass="btn-group" rendered="#{javascript:document1.isEditable()}">
+					<xp:button value="Save" id="button1" styleClass="btn-primary">
+						<xp:eventHandler event="onclick" submit="true" refreshMode="complete" immediate="false"
+							save="false">
+							<xp:this.action>
+								<xp:actionGroup>
+									<xp:saveDocument></xp:saveDocument>
+									<xp:openPage name="/#{documentName}.xsp" target="editDocument"
+										documentId="#{javascript:document1.getDocument().getUniversalID()}">
+									</xp:openPage>
+								</xp:actionGroup>
+							</xp:this.action>
+						</xp:eventHandler>
+					</xp:button>
+
+					<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+						<span class="caret"></span>
+					</button>
+
+					<ul class="dropdown-menu">
+						<li>
+							<xp:link escape="true" text="... and close" id="link2">
+								<xp:eventHandler event="onclick" submit="true" refreshMode="complete" immediate="false"
+									save="false" id="eventHandler1">
+									<xp:this.action>
+										<xp:actionGroup>
+											<xp:saveDocument></xp:saveDocument>
+											<xp:openPage name="#{linkBack}"></xp:openPage>
+										</xp:actionGroup>
+									</xp:this.action>
+								</xp:eventHandler>
+							</xp:link>
+						</li>
+					</ul>
+				</xp:div>
+
+				<xp:link escape="true" id="link1" text="Close" value="#{linkBack}" styleClass="btn btn-link"></xp:link>
+			</div>
+		</div>
+	</div>
+</xp:view>

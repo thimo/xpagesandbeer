@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom" createForm="false" pageTitle="Archief">
+	<xp:this.resources>
+		<xp:script src="/utils" clientSide="false"></xp:script>
+		<xp:bundle src="/settings.properties" var="settings"></xp:bundle>
+	</xp:this.resources>
+	
+	<xc:_layout>
+		<xp:this.facets>
+			<xp:panel xp:key="body" disableOutputTag="true">
+				<div class="section">
+					<div class="w-container">
+						<div class="w-row">
+							<div class="w-col w-col-12">
+								<xc:_page page_name="archief" header_tagname="h3"></xc:_page>
+							</div>
+						</div>
+
+						<div class="w-row kalender">
+							<div class="w-col w-col-6">
+								<xc:eventsArchived></xc:eventsArchived>
+							</div>
+						</div>
+					</div>
+				</div>
+			</xp:panel>
+		</xp:this.facets>
+	</xc:_layout>
+</xp:view>
+

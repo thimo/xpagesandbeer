@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom" pageTitle="Event">
+	<xp:this.acl>
+		<xp:acl>
+			<xp:this.entries>
+				<xp:aclEntry right="EDITOR" type="ROLE" loaded="true">
+					<xp:this.name><![CDATA[[administrator]]]></xp:this.name>
+				</xp:aclEntry>
+			</xp:this.entries>
+		</xp:acl>
+	</xp:this.acl>
+
+	<xp:this.dataContexts>
+		<xp:dataContext var="viewName" value="events"></xp:dataContext>
+		<xp:dataContext var="documentName" value="event"></xp:dataContext>
+	</xp:this.dataContexts>
+
+	<xp:this.resources>
+		<xp:script src="/utils" clientSide="false"></xp:script>
+		<xp:bundle src="/settings.properties" var="settings"></xp:bundle>
+	</xp:this.resources>
+
+	<xp:panel disableOutputTag="true">
+		<xp:this.data>
+			<xp:dominoDocument var="document1" formName="#{documentName}" action="editDocument"
+				computeWithForm="both">
+			</xp:dominoDocument>
+		</xp:this.data>
+
+		<xc:_layout selectedMenuItem="#{viewName}" pageTitle="#{javascript:@ProperCase(documentName)}">
+			<xc:this.pageSubtitle><![CDATA[#{javascript:
+if (document1.isNewNote()) {
+	return 'New ' + documentName;
+} else if (!document1.getItemValueDate('date')) {
+	return 'Unknown date';
+} else {
+	return dateFormat(document1.getItemValueDate('date'), 'd MMMM yyyy');
+}
+}]]></xc:this.pageSubtitle>
+			<xp:this.facets>
+				<xp:panel xp:key="headerButtons"></xp:panel>
+
+				<xp:panel xp:key="body" id="body">
+					<div class="row">
+						<div class="col-lg-8">
+							<div class="form-horizontal">
+								<div class="form-group">
+									<xp:label value="Date *" for="date" styleClass="col-lg-2"></xp:label>
+									<div class="col-lg-4">
+										<div class="input-group date" data-date-format="mm-dd-yyyy">
+											<xp:inputText id="date" value="#{document1.date}" required="true">
+												<xp:this.converter>
+													<xp:convertDateTime pattern="dd-MM-yyyy"></xp:convertDateTime>
+												</xp:this.converter>
+
+												<xp:this.attrs>
+													<xp:attr name="placeholder" value="#{settings.date_format_display}">
+													</xp:attr>
+												</xp:this.attrs>
+
+												<xp:this.validators>
+													<xp:validateRequired message="Please add a date. 'Cause without no date, we can't have no event">
+													</xp:validateRequired>
+												</xp:this.validators>
+											</xp:inputText>
+											<span class="input-group-addon">
+												<i class="glyphicon glyphicon-calendar"></i>
+											</span>
+										</div>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<xp:label value="Status" for="status" styleClass="col-lg-2"></xp:label>
+									<div class="col-sm-10">
+										<div class="radio">
+											<xp:radioGroup id="status" value="#{document1.status}" defaultValue="new" layout="pageDirection">
+												<xp:selectItem itemLabel="New" itemValue="new"></xp:selectItem>
+												<xp:selectItem itemLabel="Active" itemValue="active"></xp:selectItem>
+												<xp:selectItem itemLabel="Archived" itemValue="archived"></xp:selectItem>
+												<xp:selectItem itemLabel="Disabled" itemValue="disabled"></xp:selectItem>
+											</xp:radioGroup>
+										</div>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<xp:label value="Start time" for="startTime" styleClass="col-lg-2"></xp:label>
+									<div class="col-lg-4">
+										<xp:inputText id="startTime" value="#{document1.startTime}" defaultValue="16:00">
+											<xp:this.converter>
+												<xp:convertDateTime pattern="HH:mm"></xp:convertDateTime>
+											</xp:this.converter>
+
+											<xp:this.attrs>
+												<xp:attr name="placeholder" value="#{settings.time_format}"></xp:attr>
+											</xp:this.attrs>
+										</xp:inputText>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<xp:label value="End time" for="endTime" styleClass="col-lg-2"></xp:label>
+									<div class="col-lg-4">
+										<xp:inputText id="endTime" value="#{document1.endTime}" defaultValue="20:00">
+											<xp:this.converter>
+												<xp:convertDateTime pattern="HH:mm"></xp:convertDateTime>
+											</xp:this.converter>
+
+											<xp:this.attrs>
+												<xp:attr name="placeholder" value="#{settings.time_format}"></xp:attr>
+											</xp:this.attrs>
+										</xp:inputText>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<xp:label value="Contact" for="personId" styleClass="col-lg-2"></xp:label>
+									<div class="col-lg-10">
+										<xp:comboBox id="personId" value="#{document1.personId}">
+											<xp:this.attrs>
+												<xp:attr name="placeholder" value="Select a contact person"></xp:attr>
+											</xp:this.attrs>
+											<xp:selectItem itemLabel="" itemValue=""></xp:selectItem>
+											<xp:selectItems>
+												<xp:this.value><![CDATA[#{javascript:dbColumnArray("", "", "persons", 3, {cache:settings.cache_enabled})}]]></xp:this.value>
+											</xp:selectItems>
+										</xp:comboBox>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<xp:label value="Location" for="companyId" styleClass="col-lg-2"></xp:label>
+									<div class="col-lg-10">
+										<xp:comboBox id="companyId" value="#{document1.companyId}">
+											<xp:this.attrs>
+												<xp:attr name="placeholder" value="Select a location"></xp:attr>
+											</xp:this.attrs>
+											<xp:selectItem itemLabel="" itemValue=""></xp:selectItem>
+											<xp:selectItems>
+												<xp:this.value><![CDATA[#{javascript:dbColumnArray("", "", "companies", 8, {cache:settings.cache_enabled})}]]></xp:this.value>
+											</xp:selectItems>
+										</xp:comboBox>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<xp:label value="Limit" for="limit" styleClass="col-lg-2"></xp:label>
+									<div class="col-lg-4">
+										<xp:inputText id="limit" value="#{document1.limit}">
+											<xp:this.attrs>
+												<xp:attr name="placeholder" value="Maximum # of registrations"></xp:attr>
+											</xp:this.attrs>
+											<xp:this.converter>
+												<xp:convertNumber type="number" integerOnly="true"></xp:convertNumber>
+											</xp:this.converter>
+										</xp:inputText>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<xp:label value="Abstract" for="abstract" styleClass="col-lg-2"></xp:label>
+									<div class="col-lg-10">
+										<xp:inputTextarea id="abstract" value="#{document1.abstract}"></xp:inputTextarea>
+									</div>
+								</div>
+
+								<xc:formActionButtons></xc:formActionButtons>
+							</div>
+						</div>
+
+						<xp:panel styleClass="col-lg-4" rendered="#{javascript:!document1.isNewNote()}">
+							<xp:this.dataContexts>
+								<xp:dataContext var="viewName" value="topics"></xp:dataContext>
+								<xp:dataContext var="documentName" value="topic"></xp:dataContext>
+							</xp:this.dataContexts>
+
+							<xp:panel styleClass="panel panel-default">
+								<xp:this.data>
+									<xp:dominoView var="view1" viewName="#{viewName}" keys="#{javascript:document1.getDocument().getUniversalID()}"
+										keysExactMatch="true">
+									</xp:dominoView>
+								</xp:this.data>
+
+								<div class="panel-heading">
+									<xp:link styleClass="btn btn-default btn-xs pull-right" escape="true" text="Add #{documentName}"
+										value="/#{documentName}.xsp?action=newDocument&amp;eventid=#{javascript:document1.getDocument().getUniversalID()}"></xp:link>
+
+									<xp:text value="#{javascript:@ProperCase(viewName)}"></xp:text>
+								</div>
+
+								<div class="panel-body">
+									<xp:repeat id="topicsRepeat" rows="9999" value="#{view1}" var="row" indexVar="index">
+										<div>
+											<xp:text escape="true">
+												<xp:this.value><![CDATA[#{row.startTime}]]></xp:this.value>
+												<xp:this.converter>
+													<xp:convertDateTime pattern="HH:mm"></xp:convertDateTime>
+												</xp:this.converter>
+											</xp:text>
+											&#160;&#160;
+											<xp:link escape="true" value="/#{documentName}.xsp">
+												<xp:this.parameters>
+													<xp:parameter name="documentId" value="#{row.unid}"></xp:parameter>
+												</xp:this.parameters>
+												<xp:text escape="true" value="#{row.title}"></xp:text>
+												<xp:text value="Unknown title" rendered="#{empty row.title}" style="font-style: italic;">
+												</xp:text>
+											</xp:link>
+
+											<xp:span rendered="#{!empty row.personId}">
+												&#160;-&#160;
+												<xp:text escape="true">
+													<xp:this.value><![CDATA[#{javascript:
+var personDoc = database.getDocumentByUNID(row.getColumnValue('personId'));
+return personDoc.getItemValueString('name');
+}]]></xp:this.value>
+												</xp:text>
+											</xp:span>
+										</div>
+									</xp:repeat>
+									<xp:div style="font-style: italic;" rendered="#{javascript:getComponent('topicsRepeat').getRowCount() == 0}">
+										No&#160;
+										<xp:text value="#{viewName}"></xp:text>
+										&#160;found
+									</xp:div>
+								</div>
+							</xp:panel>
+						</xp:panel>
+
+						<xp:panel styleClass="col-lg-4" rendered="#{javascript:!document1.isNewNote()}">
+							<xp:this.dataContexts>
+								<xp:dataContext var="viewName" value="registrations"></xp:dataContext>
+								<xp:dataContext var="documentName" value="registration"></xp:dataContext>
+							</xp:this.dataContexts>
+
+							<xp:panel styleClass="panel panel-default">
+								<xp:this.data>
+									<xp:dominoView var="view1" viewName="#{viewName}" keys="#{javascript:document1.getDocument().getUniversalID()}"
+										keysExactMatch="true">
+									</xp:dominoView>
+								</xp:this.data>
+
+								<div class="panel-heading">
+									<xp:link styleClass="btn btn-default btn-xs pull-right" escape="true" text="Add #{documentName}"
+										value="/#{documentName}.xsp?action=newDocument&amp;eventid=#{javascript:document1.getDocument().getUniversalID()}"></xp:link>
+
+									<xp:link escape="true" text="#{javascript:@ProperCase(viewName)}"
+										value="/#{viewName}.xsp?eventid=#{javascript:document1.getDocument().getUniversalID();}"></xp:link>
+									&#160;(
+									<xp:text escape="true" value="#{javascript:'' + getComponent('registrationsRepeat').getRowCount()}"></xp:text>
+									)
+								</div>
+
+								<div class="panel-body">
+									<xp:repeat id="registrationsRepeat" rows="9999" value="#{view1}" var="row" indexVar="index">
+										<div>
+											<xp:link escape="true" value="/#{documentName}.xsp">
+												<xp:this.parameters>
+													<xp:parameter name="documentId" value="#{row.unid}"></xp:parameter>
+												</xp:this.parameters>
+												<xp:text escape="true" value="#{row.name}"></xp:text>
+											</xp:link>
+
+										</div>
+									</xp:repeat>
+									<xp:div style="font-style: italic;" rendered="#{javascript:getComponent('registrationsRepeat').getRowCount() == 0}">
+										No&#160;
+										<xp:text value="#{viewName}"></xp:text>
+										&#160;found
+									</xp:div>
+								</div>
+							</xp:panel>
+
+						</xp:panel>
+					</div>
+				</xp:panel>
+
+			</xp:this.facets>
+		</xc:_layout>
+
+		<xp:scriptBlock type="text/javascript">
+			<xp:this.value><![CDATA[
+$(function() {
+	x$('#{id:personId}').select2({
+			allowClear: true
+	});
+	
+	x$('#{id:companyId}').select2({
+			allowClear: true
+	});
+	
+	$('.input-group.date').datepicker({
+    format: "#{settings.date_format_display}",
+    startView: 0,
+    todayHighlight: true,
+    autoclose: true,
+    orientation: "auto left"
+	});
+});
+]]></xp:this.value>
+		</xp:scriptBlock>
+	</xp:panel>
+</xp:view>

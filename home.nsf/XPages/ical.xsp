@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+	<xp:this.resources>
+		<xp:script src="/utils" clientSide="false"></xp:script>
+		<xp:bundle src="/settings.properties" var="settings"></xp:bundle>
+	</xp:this.resources>
+
+	<xp:this.beforeRenderResponse><![CDATA[#{javascript:
+// Get the output stream
+var exCon = facesContext.getExternalContext();
+var response = exCon.getResponse();
+var writer = response.getWriter();
+
+response.setContentType("text/calendar");
+//response.setContentType("text/plain");
+//response.setHeader("Cache-Control", "no-cache");
+
+// Here would be the business logic adding to stuff
+
+try {
+	var cmsDb:NotesDatabase = session.getDatabase(database.getServer(), settings.cms_db);
+	var eventsActive:NotesView = cmsDb.getView("eventsActive");
+	var event:NotesDocument = eventsActive.getFirstDocument();
+	
+	var filename = database.getTitle() + " " + nl.xpagesandbeer.CalendarUtils.dateFormatter(event.getItemValueDateTimeArray('date'), "dd-MM-yyyy") + ".ics";
+	response.setHeader("Content-disposition","attachment; filename=" + filename + "");
+
+	writer.write(nl.xpagesandbeer.CalendarUtils.getIcalForEvent(event));
+} catch(e) {
+	print("error " + e);
+}
+
+facesContext.responseComplete();
+}]]></xp:this.beforeRenderResponse>
+</xp:view>

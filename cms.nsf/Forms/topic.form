@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='utf-8'?>
+<form name='topic' xmlns='http://www.lotus.com/dxl' version='9.0' maintenanceversion='1.0'
+ replicaid='C1257BFA0065FC44' hide='web' publicaccess='false' designerversion='8.5.3'
+ renderpassthrough='true'>
+<noteinfo noteid='3d2' unid='8FA5B87F2DF25CC4C1257C0100272AB9' sequence='10'>
+<created><datetime dst='true'>20131011T090748,41+02</datetime></created>
+<modified><datetime dst='true'>20140413T205839,97+02</datetime></modified>
+<revised><datetime>20140117T094139,03+01</datetime></revised>
+<lastaccessed><datetime dst='true'>20140413T205839,97+02</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20140413T205839,97+02</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Thimo Jansen/O=TJit</name><name>CN=Thimo Jansen/O=WEBCITC</name></updatedby>
+<wassignedby><name>CN=Thimo Jansen/O=WEBCITC</name></wassignedby>
+<body><richtext>
+<pardef id='1' leftmargin='1in' tabs='L0.5000in L1in L1.5000in L2in L2.5000in L3in L3.5000in L4in'/>
+<par def='1'>topic</par>
+<par def='1'>	id	<field type='text' kind='computedwhencomposed' name='id'><code
+ event='defaultvalue'><formula>@Text( @DocumentUniqueID )</formula></code></field><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par>
+<par def='1'>	eventId	<field type='text' kind='editable' name='eventId'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par>
+<par def='1'>	timeTime	<field type='datetime' kind='editable' name='startTime'><datetimeformat
+ show='date' date='yearmonthday' fourdigityearfor21stcentury='true' zone='never'
+ dateformat='weekdaydaymonthyear' dayformat='twodigitday' monthformat='twodigitmonth'
+ yearformat='fourdigityear' weekdayformat='shortname' dateseparator1=' ' dateseparator2='-'
+ dateseparator3='-' timeseparator=':' timeformat24='true' preference='usersetting'/></field></par>
+<par def='1'>	personId	<field type='text' kind='editable' name='personId'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par>
+<par def='1'>	title	<field type='text' kind='editable' name='title'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par>
+<par def='1'>	abstract	<field type='text' kind='editable' name='abstract'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par>
+<par def='1'>	slideshareHtml	<field type='text' kind='editable' name='slideshareHtml'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par>
+<par def='1'>	links	<field type='text' kind='editable' name='links'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par>
+<par def='1'>	attachments	<field type='richtext' kind='editable' name='attachments'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAEAAAA=
+</compositedata></par></richtext></body>
+<item name='eventOrder' summary='false'><number>0</number></item>
+<item name='$$ScriptName' summary='false' sign='true'><text>topic</text></item></form>
+

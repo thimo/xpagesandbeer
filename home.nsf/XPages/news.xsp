@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom" createForm="false"
+	pageTitle="Nieuws">
+	<xp:this.resources>
+		<xp:script src="/utils" clientSide="false"></xp:script>
+		<xp:bundle src="/settings.properties" var="settings"></xp:bundle>
+	</xp:this.resources>
+
+	<xc:_layout>
+		<xp:this.facets>
+			<xp:panel xp:key="body" disableOutputTag="true">
+				<div class="section">
+					<div class="w-container">
+						<div class="w-row">
+							<div class="w-col w-col-12">
+								<xc:_page page_name="news" header_tagname="h3"></xc:_page>
+							</div>
+						</div>
+
+						<div class="w-row kalender">
+							<xp:panel styleClass="w-col w-col-6">
+								<xp:this.data>
+									<xp:dominoView var="newsItems" databaseName="#{settings.cms_db}" viewName="newsItems">
+									</xp:dominoView>
+								</xp:this.data>
+
+								<xp:repeat id="repeat1" rows="9999" value="#{newsItems}" var="row" indexVar="index">
+									<div class="w-col w-col-3"></div>
+									<div class="w-col w-col-9">
+										<xp:text escape="false">
+											<xp:this.value><![CDATA[#{javascript:
+var thisYear = (new Date(row.getColumnValue('date'))).getFullYear().toString();
+if (!requestScope.lastYear || thisYear != requestScope.lastYear) {
+	requestScope.lastYear = thisYear;
+	return '<h3>' + thisYear + '</h3>';
+}
+}]]></xp:this.value>
+										</xp:text>
+									</div>
+									<div class="w-row kalender">
+										<div class="w-col w-col-3">
+											<div>
+												<xp:text escape="true" value="#{row.date}">
+													<xp:this.converter>
+														<xp:convertDateTime pattern="d MMMM"></xp:convertDateTime>
+													</xp:this.converter>
+												</xp:text>
+											</div>
+										</div>
+										<div class="w-col w-col-9">
+
+											<h5>
+												<xp:text escape="true" value="#{row.title}"></xp:text>
+											</h5>
+											<!--											<p class="intro">-->
+											<!--												<xp:text escape="true" value="#{row.date}">-->
+											<!--													<xp:this.converter>-->
+											<!--														<xp:convertDateTime pattern="d MMMM yyyy"></xp:convertDateTime>-->
+											<!--													</xp:this.converter>-->
+											<!--												</xp:text>-->
+											<!--											<xp:panel rendered="#{javascript:row.getColumnValue('Intro') != ''}" tagName="p" styleClass="intro">-->
+											<!--												<xp:text escape="true" value="#{row.Intro}"></xp:text>-->
+											<!--											</xp:panel>-->
+											<!--											</p>-->
+
+											<xp:panel rendered="#{javascript:row.getColumnValue('Body') != '' }" tagName="div" styleClass="body">
+												<xp:text escape="false">
+													<xp:this.value><![CDATA[#{javascript:new org.markdown4j.Markdown4jProcessor().process(row.getColumnValue('Body'));}]]></xp:this.value>
+												</xp:text>
+											</xp:panel>
+
+										</div>
+									</div>
+								</xp:repeat>
+							</xp:panel>
+						</div>
+					</div>
+				</div>
+			</xp:panel>
+		</xp:this.facets>
+	</xc:_layout>
+</xp:view>
+

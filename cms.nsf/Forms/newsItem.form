@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='utf-8'?>
+<form name='newsItem' xmlns='http://www.lotus.com/dxl' version='9.0' maintenanceversion='1.0'
+ replicaid='C1257BFA0065FC44' publicaccess='false' designerversion='8.5.3'
+ renderpassthrough='true'>
+<noteinfo noteid='356' unid='E5699915858D6CA0C1257C83006ED4E5' sequence='6'>
+<created><datetime>20140218T211034,61+01</datetime></created>
+<modified><datetime dst='true'>20140413T205839,28+02</datetime></modified>
+<revised><datetime>20140218T220415,96+01</datetime></revised>
+<lastaccessed><datetime dst='true'>20140413T205839,28+02</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20140413T205839,28+02</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Thimo Jansen/O=WEBCITC</name></updatedby>
+<wassignedby><name>CN=Thimo Jansen/O=WEBCITC</name></wassignedby>
+<body><richtext>
+<pardef id='1'/>
+<par def='1'>newsItem</par>
+<par def='1'/>
+<par def='1'>	id	<field type='text' kind='computedwhencomposed' name='id'><code
+ event='defaultvalue'><formula>@Text( @DocumentUniqueID )</formula></code></field><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par>
+<par def='1'>	date	<field type='datetime' kind='editable' name='date'><datetimeformat
+ show='date' date='yearmonthday' fourdigityearfor21stcentury='true' zone='never'
+ dateformat='weekdaydaymonthyear' dayformat='twodigitday' monthformat='twodigitmonth'
+ yearformat='fourdigityear' weekdayformat='shortname' dateseparator1=' ' dateseparator2='-'
+ dateseparator3='-' timeseparator=':' timeformat24='true' preference='usersetting'/></field></par>
+<par def='1'>	title	<field type='text' kind='editable' name='title'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par>
+<par def='1'>	intro	<field type='text' kind='editable' name='intro'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par>
+<par def='1'>	body	<field type='text' kind='editable' name='body'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAEAAAA=
+</compositedata></par>
+<par def='1'/></richtext></body>
+<item name='$$ScriptName' summary='false' sign='true'><text>news</text></item></form>
+

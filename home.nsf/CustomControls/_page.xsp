@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+	<xp:this.data>
+		<xp:dominoDocument var="pageDocument1" action="openDocument" formName="page" ignoreRequestParams="true"
+			databaseName="#{settings.cms_db}">
+			<xp:this.documentId><![CDATA[${javascript:
+if (compositeData.page_name == '') {
+	return '';
+} else {
+	var cmsDb:NotesDatabase = session.getDatabase(database.getServer(), settings.cms_db);
+	var pageView:NotesView = cmsDb.getView('pages');
+	var pageDoc:NotesDocument = pageView.getDocumentByKey(compositeData.page_name, true);
+	if (pageDoc == null) {
+		pageDoc = cmsDb.createDocument();
+		
+		pageDoc.replaceItemValue('form', 'page');
+		pageDoc.replaceItemValue('Name', compositeData.page_name);
+		pageDoc.replaceItemValue('Title', compositeData.page_name);
+		
+		pageDoc.save();
+	}
+	return pageDoc.getNoteID();
+}}]]></xp:this.documentId>
+		</xp:dominoDocument>
+	</xp:this.data>
+
+	<xp:this.resources>
+		<xp:bundle src="/settings.properties" var="settings"></xp:bundle>
+	</xp:this.resources>
+	<xp:panel loaded="${javascript:pageDocument1.getItemValueString('Title') != '' }" tagName="#{compositeData.header_tagname}">
+		<xp:text escape="true" value="${pageDocument1.Title}"></xp:text>
+	</xp:panel>
+
+	<xp:panel loaded="${javascript:pageDocument1.getItemValueString('Intro') != ''}" tagName="p" styleClass="intro">
+		<xp:text escape="true" value="${pageDocument1.Intro}"></xp:text>
+	</xp:panel>
+
+	<xp:panel loaded="${javascript:pageDocument1.getItemValue('Body') != '' }" tagName="div" styleClass="body">
+		<xp:text escape="false">
+			<xp:this.value><![CDATA[${javascript:new org.markdown4j.Markdown4jProcessor().process(pageDocument1.getItemValueString('Body'));}]]></xp:this.value>
+		</xp:text>
+	</xp:panel>
+</xp:view>

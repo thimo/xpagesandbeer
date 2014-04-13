@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+	<xp:this.data>
+		<xp:dominoView var="calendarActive" databaseName="#{settings.cms_db}" viewName="calendarActivePerYear"
+			keys="#{compositeData.year}">
+		</xp:dominoView>
+	</xp:this.data>
+
+	<xp:repeat id="repeat1" rows="9999" value="#{calendarActive}" var="row" indexVar="index">
+		<div class="w-col w-col-3"></div>
+		<div class="w-col w-col-9">
+			<xp:text escape="false">
+				<xp:this.value><![CDATA[#{javascript:
+var thisYear = (new Date(row.getColumnValue('date'))).getFullYear().toString();
+if (!requestScope.lastYear || thisYear != requestScope.lastYear) {
+	requestScope.lastYear = thisYear;
+	return '<h3>' + thisYear + '</h3>';
+}
+}]]></xp:this.value>
+			</xp:text>
+		</div>
+		<div class="w-row kalender">
+			<div class="w-col w-col-3">
+				<div>
+					<xp:text escape="true" value="#{row.date}">
+						<xp:this.converter>
+							<xp:convertDateTime pattern="d MMMM"></xp:convertDateTime>
+						</xp:this.converter>
+					</xp:text>
+				</div>
+			</div>
+			<div class="w-col w-col-9">
+				<div>
+					<strong>
+						<xp:text escape="true" value="#{row.name}" rendered="#{empty row.websiteUrl}"></xp:text>
+						<xp:link escape="true" text="#{row.name}" value="#{row.websiteUrl}" rendered="#{not empty row.websiteUrl}">
+							<xp:this.target><![CDATA[#{javascript:row.getColumnValue('websiteUrl').toString().contains('http') ?	'_blank' : '';}]]></xp:this.target>
+						</xp:link>
+					</strong>
+				</div>
+				<div style="font-style: italic;">
+					<xp:text escape="true" value="#{row.location}" rendered="#{not empty row.location}"></xp:text>
+					<xp:panel disableOutputTag="true" rendered="#{not empty row.companyId}">
+						<xp:this.data>
+							<xp:dominoDocument var="company" action="openDocument" ignoreRequestParams="true">
+								<xp:this.databaseName><![CDATA[#{settings.cms_db}]]></xp:this.databaseName>
+								<xp:this.documentId><![CDATA[#{row.companyId}]]></xp:this.documentId>
+							</xp:dominoDocument>
+						</xp:this.data>
+
+						<xp:text escape="true" value="#{company.name}"></xp:text>
+						,&#160;
+						<xp:text escape="true" value="#{company.city}"></xp:text>
+					</xp:panel>
+				</div>
+				<div>
+					<xp:text escape="true" value="#{row.abstract}"></xp:text>
+				</div>
+
+				<xp:panel>
+					<xp:this.data>
+						<xp:dominoView var="rowTopics" databaseName="#{settings.cms_db}" viewName="topics">
+							<xp:this.keys><![CDATA[#{javascript:row.getDocument().getUniversalID()}]]></xp:this.keys>
+						</xp:dominoView>
+					</xp:this.data>
+
+					<xp:repeat id="repeat4" rows="30" indexVar="index" var="row" value="#{rowTopics}">
+						<xp:panel rendered="#{not empty row.personId}" tagName="div" styleClass="littleVerticalMargin">
+							<xp:text escape="true" value="#{row.title}"></xp:text>
+							<xp:panel>
+								<xp:this.data>
+									<xp:dominoDocument var="topicPerson" action="openDocument" ignoreRequestParams="true">
+										<xp:this.databaseName><![CDATA[#{settings.cms_db}]]></xp:this.databaseName>
+										<xp:this.documentId><![CDATA[#{row.personId}]]></xp:this.documentId>
+									</xp:dominoDocument>
+								</xp:this.data>
+								&#160;-&#160;
+								<xp:text escape="true" value="#{topicPerson.name}"></xp:text>
+							</xp:panel>
+						</xp:panel>
+					</xp:repeat>
+				</xp:panel>
+			</div>
+		</div>
+	</xp:repeat>
+</xp:view>

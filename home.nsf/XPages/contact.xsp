@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom" createForm="false" pageTitle="Contact"> 
+	<xp:this.resources>
+		<xp:script src="/utils" clientSide="false"></xp:script>
+		<xp:bundle src="/settings.properties" var="settings"></xp:bundle>
+	</xp:this.resources>
+
+	<xc:_layout>
+		<xp:this.facets>
+			<xp:panel xp:key="body" disableOutputTag="true">
+				<div class="section">
+					<div class="w-container">
+						<div class="w-row">
+							<div class="w-col w-col-6">
+								<xc:_page page_name="contact" header_tagname="h3"></xc:_page>
+							</div>
+							<div class="w-col w-col-6">
+								<xp:image url="/contact-can-string.jpg"></xp:image>
+							</div>
+						</div>
+
+						<div class="w-row">
+							<div class="w-col w-col-6">
+							</div>
+						</div>
+					</div>
+				</div>
+
+<!--				<div class="section">-->
+<!--					<div class="w-container">-->
+<!--						<div class="w-row">-->
+<!--							<div class="w-col w-col-6">-->
+<!--								<h3>Aanmelden</h3>-->
+<!--								<p>Meld je aan</p>-->
+<!--								<div class="w-form">-->
+<!--									<form name="email-form" data-name="Email Form">-->
+<!--										<label for="name">Name:</label>-->
+<!--										<input class="w-input" type="text" placeholder="Enter your name" name="name" data-name="Name">-->
+<!--										</input>-->
+<!--										<label for="email">Email Address:</label>-->
+<!--										<input class="w-input" type="text" placeholder="Enter your email address" name="email" data-name="Email"-->
+<!--											required="required">-->
+<!--										</input>-->
+<!--										<input class="w-button button" type="submit" value="Submit" data-wait="Please wait...">-->
+<!--										</input>-->
+<!--									</form>-->
+<!--									<div class="w-form-done">-->
+<!--										<p>Thank you! Your submission has been received!</p>-->
+<!--									</div>-->
+<!--									<div class="w-form-fail">-->
+<!--										<p>Oops! Something went wrong while submitting the form :(</p>-->
+<!--									</div>-->
+<!--								</div>-->
+<!--							</div>-->
+<!--							<div class="w-col w-col-6"></div>-->
+<!--						</div>-->
+<!--					</div>-->
+<!--				</div>-->
+			</xp:panel>
+		</xp:this.facets>
+	</xc:_layout>
+</xp:view>

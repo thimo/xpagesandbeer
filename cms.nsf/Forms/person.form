@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='utf-8'?>
+<form name='person' xmlns='http://www.lotus.com/dxl' version='9.0' maintenanceversion='1.0'
+ replicaid='C1257BFA0065FC44' hide='web' publicaccess='false' designerversion='8.5.3'
+ renderpassthrough='true'>
+<noteinfo noteid='3e2' unid='1B37963868E8CD9DC1257C0100272588' sequence='6'>
+<created><datetime dst='true'>20131011T090735,12+02</datetime></created>
+<modified><datetime dst='true'>20140413T205840,05+02</datetime></modified>
+<revised><datetime>20140117T094136,41+01</datetime></revised>
+<lastaccessed><datetime dst='true'>20140413T205840,05+02</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20140413T205840,05+02</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Thimo Jansen/O=TJit</name><name>CN=Thimo Jansen/O=WEBCITC</name></updatedby>
+<wassignedby><name>CN=Thimo Jansen/O=WEBCITC</name></wassignedby>
+<body><richtext>
+<pardef id='1'/>
+<par def='1'>person</par>
+<par def='1'>	id	<field type='text' kind='computedwhencomposed' name='id'><code
+ event='defaultvalue'><formula>@Text( @DocumentUniqueID )</formula></code></field><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par>
+<par def='1'>	name	<field type='text' kind='editable' name='name'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par>
+<par def='1'>	companyId	<field type='text' kind='editable' name='companyId'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par>
+<par def='1'>	jobtitle	<field type='text' kind='editable' name='jobtitle'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par>
+<par def='1'>	bio	<field type='text' kind='editable' name='bio'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par>
+<par def='1'>	email	<field type='text' kind='editable' name='email'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par>
+<par def='1'>	twitterName	<field type='text' kind='editable' name='twitterName'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par>
+<par def='1'>	linkedinUrl	<field type='text' kind='editable' name='linkedinUrl'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par>
+<par def='1'>	blogUrl	<field type='text' kind='editable' name='blogUrl'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par>
+<par def='1'>	photo	<field type='richtext' kind='editable' name='photo' storageformat='htmlmime'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAEAAAA=
+</compositedata></par>
+<par def='1'/></richtext></body>
+<item name='$$ScriptName' summary='false' sign='true'><text>person</text></item></form>
+

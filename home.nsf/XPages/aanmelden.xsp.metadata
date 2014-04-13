@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" maintenanceversion="1.0" replicaid="C1257AF2006A18BE" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="46a" sequence="418" unid="5178535A65C1689BC1257C3B0063FB18">
+<created><datetime>20131208T191203,44+01</datetime></created>
+<modified><datetime dst="true">20140413T205806,22+02</datetime></modified>
+<revised><datetime>20140320T233303,01+01</datetime></revised>
+<lastaccessed><datetime dst="true">20140413T205806,22+02</datetime></lastaccessed>
+<addedtofile><datetime dst="true">20140413T205806,22+02</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Thimo Jansen/O=TJit</name><name>CN=Thimo Jansen/O=WEBCITC</name></updatedby>
+<wassignedby><name>CN=Thimo Jansen/O=WEBCITC</name></wassignedby>
+<item name="$Flags"><text>gC~4K</text></item>
+<item name="$TITLE"><text>aanmelden.xsp</text></item>
+
+<item name="$DesignerVersion"><text>8.5.3</text></item>
+
+
+
+
+<item name="$FileNames" sign="true"><text>aanmelden.xsp</text></item>
+
+
+</note>

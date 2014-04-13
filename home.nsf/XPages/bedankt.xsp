@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom" createForm="false" pageTitle="Met dank aan...">
+	<xp:this.resources>
+		<xp:script src="/utils" clientSide="false"></xp:script>
+		<xp:bundle src="/settings.properties" var="settings"></xp:bundle>
+	</xp:this.resources>
+	
+	<xc:_layout>
+		<xp:this.facets>
+			<xp:panel xp:key="body" disableOutputTag="true">
+				<div class="section">
+					<div class="w-container">
+						<div class="w-row">
+							<div class="w-col w-col-12">
+								<xc:_page page_name="bedankt" header_tagname="h3"></xc:_page>
+							</div>
+						</div>
+
+						<div class="w-row">
+							<div class="w-col w-col-4">
+								<p>
+									<strong>Bedankt!</strong>
+								</p>
+
+								<xp:panel>
+									<xp:this.data>
+										<xp:dominoView var="companies" databaseName="#{settings.cms_db}" viewName="companies"></xp:dominoView>
+									</xp:this.data>
+
+									<xp:repeat rows="9999" indexVar="index" var="company" value="#{companies}">
+										<xp:panel styleClass="littleVerticalMargin">
+											<xp:text escape="true" value="#{company.name}" rendered="#{empty company.websiteUrl}"></xp:text>
+											<xp:link escape="true" target="_blank" text="#{company.name}" value="#{company.websiteUrl}" rendered="#{not empty company.websiteUrl}"></xp:link>
+										</xp:panel>
+									</xp:repeat>
+								</xp:panel>
+							</div>
+							<div class="w-col w-col-8" style="padding: 20px 0;">
+								<xp:image url="/thank-you-different-languages_600.png" id="image1"></xp:image>
+							</div>
+						</div>
+					</div>
+				</div>
+			</xp:panel>
+		</xp:this.facets>
+	</xc:_layout>
+</xp:view>

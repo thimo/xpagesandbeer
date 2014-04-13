@@ -1,0 +1,75 @@
+
+	<!--
+		The default theme contents use theme inheritance. Application themes can extend an existing global theme using the
+		extends attribute. Existing themes include the following options: 1. webstandard 2. oneui 3. notes
+	-->
+<theme extends="" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="platform:/plugin/com.ibm.designer.domino.stylekits/schema/stylekit.xsd">
+	<!--
+		Use this pattern to include resources (such as style sheets and JavaScript files that are used by this theme.
+	-->
+
+	<resources>
+		<styleSheet href="/normalize.css"></styleSheet>
+		<styleSheet href="/webflow.css"></styleSheet>
+		<styleSheet href="/xpagesandbeer.webflow.css"></styleSheet>
+
+		<script clientSide="true" src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
+		<script clientSide="true"
+			contents="WebFont.load({
+       google: {
+         families: ['Source Sans Pro:200,300,regular,600,700,900']
+       }
+     });">
+		</script>
+
+		<bundle>
+			<src>/settings.properties</src>
+			<var>settings</var>
+		</bundle>
+		<bundle>
+			<src>/content.properties</src>
+			<var>content</var>
+		</bundle>
+
+		<script src="/utils.jss"></script>
+
+		<metaData>
+			<name>description</name>
+			<content>Dé meetup voor XPages ontwikkelaars</content>
+		</metaData>
+		<metaData>
+			<name>viewport</name>
+			<content>width=device-width, initial-scale=1.0</content>
+		</metaData>
+
+	</resources>
+
+	<!--
+		Use this pattern to define property name/value pairs for controls
+	-->
+	<!--
+		<control> <name>[Control Name]</name> <property> <name>[property Name]</name> <value>[property Value]</value>
+		</property> </control>
+	-->
+
+	<control>
+		<name>ViewRoot</name>
+				<property>
+					<name>pageIcon</name>
+					<value>/favicon.ico</value>
+				</property>
+		<property mode="concat">
+			<name>pageTitle</name>
+			<value> - XPages &amp; Beer</value>
+		</property>
+		<property>
+			<name>ignoreRequestParams</name>
+			<value>true</value>
+		</property>
+		<!--		<property>-->
+		<!--			<name>createForm</name>-->
+		<!--			<value>true</value>-->
+		<!--		</property>-->
+	</control>
+
+</theme>

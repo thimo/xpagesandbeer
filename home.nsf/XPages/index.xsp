@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom" createForm="false"
+	pageTitle="Home">
+	<xp:this.resources>
+		<xp:script src="/utils" clientSide="false"></xp:script>
+		<xp:bundle src="/settings.properties" var="settings"></xp:bundle>
+	</xp:this.resources>
+
+	<xc:_layout bigHeroBox="true">
+		<xp:this.facets>
+			<xp:panel xp:key="body" disableOutputTag="true">
+				<div class="section">
+					<div class="w-container">
+						<div class="w-row">
+							<div class="w-col w-col-5">
+								<xc:_page page_name="home_welcome" header_tagname="h4"></xc:_page>
+							</div>
+							<div class="w-col w-col-2">
+							</div>
+							<xp:panel styleClass="w-col w-col-5">
+								<xp:this.data>
+									<xp:dominoDocument var="newsItem" databaseName="#{settings.cms_db}" action="openDocument"
+										ignoreRequestParams="true">
+										<xp:this.documentId><![CDATA[#{javascript:
+return dbColumnArray("", settings.cms_db, "newsItems", 5, {cache:settings.cache_enabled})[0];
+}]]></xp:this.documentId>
+									</xp:dominoDocument>
+								</xp:this.data>
+
+								<h4>
+									<xp:text escape="true" value="${newsItem.title}"></xp:text>
+								</h4>
+
+								<p class="intro">
+									Nieuws van&#160;
+									<xp:text escape="true" value="#{newsItem.date}">
+										<xp:this.converter>
+											<xp:convertDateTime pattern="d MMMM yyyy"></xp:convertDateTime>
+										</xp:this.converter>
+									</xp:text>
+								</p>
+
+								<xp:panel loaded="${javascript:newsItem.getItemValue('Body') != '' }" tagName="div" styleClass="body">
+									<xp:text escape="false">
+										<xp:this.value><![CDATA[${javascript:new org.markdown4j.Markdown4jProcessor().process(newsItem.getItemValueString('Body'));}]]></xp:this.value>
+									</xp:text>
+								</xp:panel>
+
+								<p style="text-align: right;">
+									<xp:link escape="true" text="Meer nieuws in het archief" value="/news.xsp"></xp:link>
+								</p>
+							</xp:panel>
+						</div>
+					</div>
+				</div>
+
+				<div class="content-bg volgende-meetup-bg">
+					<div class="w-container">
+						<h2 id="page-nav-meetup">Eerstvolgende meetup</h2>
+					</div>
+				</div>
+				<xp:panel styleClass="section">
+					<xp:this.data>
+						<xp:dominoDocument var="event" databaseName="#{settings.cms_db}" action="openDocument"
+							ignoreRequestParams="true">
+							<xp:this.documentId><![CDATA[#{javascript:
+return dbColumnArray("", settings.cms_db, "eventsActive", 7, {cache:settings.cache_enabled})[0];
+}]]></xp:this.documentId>
+						</xp:dominoDocument>
+					</xp:this.data>
+
+					<div class="w-container">
+						<div class="w-row">
+							<div class="w-col w-col-7">
+								<h3>
+									<xp:text escape="true" value="#{event.date}">
+										<xp:this.converter>
+											<xp:convertDateTime pattern="d MMMM yyyy"></xp:convertDateTime>
+										</xp:this.converter>
+									</xp:text>
+								</h3>
+								<xp:text escape="false" id="abstract" rendered="#{not empty event.abstract}" tagName="p">
+									<xp:this.value><![CDATA[#{javascript:new org.markdown4j.Markdown4jProcessor().process(event.getItemValueString('abstract'));}]]></xp:this.value>
+								</xp:text>
+							</div>
+							<div class="w-col w-col-1"></div>
+							<div class="w-col w-col-4"></div>
+						</div>
+						<div class="w-row">
+							<div class="w-col w-col-7">
+								<xc:eventTopics eventId="#{javascript:event.getDocument().getUniversalID()}" disableSlides="true"></xc:eventTopics>
+
+								<div style="margin-top: 40px;">
+									<xc:_page page_name="event_registration_open" header_tagname="h4">
+										<xp:this.rendered><![CDATA[#{javascript:event.getItemValueDate('date').getTime() >= (new Date()).getTime()}]]></xp:this.rendered>
+									</xc:_page>
+
+									<xp:link styleClass="button" escape="true" text="Aanmelden" value="/aanmelden.xsp">
+										<xp:this.rendered><![CDATA[#{javascript:event.getItemValueDate('date').getTime() >= (new Date()).getTime()}]]></xp:this.rendered>
+									</xp:link>
+
+									<xc:_page page_name="event_registration_closed" header_tagname="h4">
+										<xp:this.rendered><![CDATA[#{javascript:event.getItemValueDate('date').getTime() < (new Date()).getTime()}]]></xp:this.rendered>
+									</xc:_page>
+								</div>
+							</div>
+							<div class="w-col w-col-1">
+							</div>
+							<div class="w-col w-col-4">
+								<xc:eventLocation companyId="#{event.companyId}"></xc:eventLocation>
+							</div>
+						</div>
+					</div>
+				</xp:panel>
+
+				<xp:panel disableOutputTag="true">
+					<xp:this.dataContexts>
+						<xp:dataContext var="firstArchiveYear">
+							<xp:this.value><![CDATA[#{javascript:
+return dbColumnArray("", settings.cms_db, "eventsArchivedPerYear", 1, {cache:settings.cache_enabled})[0];
+}]]></xp:this.value>
+						</xp:dataContext>
+					</xp:this.dataContexts>
+
+					<div class="content-bg eerdere-meetups-bg">
+						<div class="w-container">
+							<h2 id="page-nav-archive">Eerdere meetups</h2>
+						</div>
+					</div>
+					<div class="kalender section">
+						<div class="w-container">
+							<div class="w-row">
+								<div class="w-col w-col-6">
+									<xc:eventsArchived year="#{firstArchiveYear}"></xc:eventsArchived>
+								</div>
+								<div class="w-col w-col-6">
+									<xc:eventsArchived year="#{javascript:(firstArchiveYear - 1).toString()}"></xc:eventsArchived>
+								</div>
+							</div>
+						</div>
+
+						<div class="w-container">
+							<div class="w-row">
+								<div class="w-col w-col-12 right-col">
+									<xp:link escape="true" text="Eerdere jaren >>" value="/archief.xsp"></xp:link>
+								</div>
+							</div>
+						</div>
+					</div>
+				</xp:panel>
+
+				<xp:panel disableOutputTag="true">
+					<xp:this.data>
+						<xp:dominoView var="calendarActive" databaseName="#{settings.cms_db}" viewName="calendarActivePerYear">
+						</xp:dominoView>
+					</xp:this.data>
+					<xp:this.dataContexts>
+						<xp:dataContext var="firstCalendarYear">
+							<xp:this.value><![CDATA[#{javascript:
+return dbColumnArray("", settings.cms_db, "calendarActivePerYear", 1, {cache:settings.cache_enabled})[0];
+}]]></xp:this.value>
+						</xp:dataContext>
+					</xp:this.dataContexts>
+
+					<div class="content-bg kalender-bg">
+						<div class="w-container">
+							<h2 id="page-nav-calendar">Kalender</h2>
+						</div>
+					</div>
+					<div class="kalender section">
+						<div class="w-container">
+							<div class="w-row">
+								<div class="w-col w-col-6">
+									<xc:calendarActive year="#{firstCalendarYear}"></xc:calendarActive>
+								</div>
+								<div class="w-col w-col-6">
+									<xc:calendarActive year="#{javascript:(firstCalendarYear - 1 + 2).toString()}"></xc:calendarActive>
+								</div>
+							</div>
+						</div>
+					</div>
+				</xp:panel>
+
+
+				<!--				<div class="section grey">-->
+				<!--					<div class="w-container">-->
+				<!--						<div class="w-row secondary-row">-->
+				<!--							<div class="w-col w-col-8 w-col-small-6">-->
+				<!--								<xc:_page page_name="home_action" header_tagname="h4"></xc:_page>-->
+				<!--							</div>-->
+				<!--							<div class="w-col w-col-4 w-col-small-6 button-column">-->
+				<!--								<a class="button" href="#">Button Text</a>-->
+				<!--							</div>-->
+				<!--						</div>-->
+				<!--					</div>-->
+				<!--				</div>-->
+			</xp:panel>
+		</xp:this.facets>
+	</xc:_layout>
+</xp:view>

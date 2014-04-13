@@ -1,0 +1,27 @@
+body { /*padding-top: 50px;*/
+	
+}
+
+.alert li {
+	list-style: none;
+}
+
+textarea {
+	min-height: 100px;
+}
+
+a.defaultColor {
+	color: #666;
+}
+
+a.active {
+	font-weight: bold;
+}
+
+a.archived {
+	font-style: italic;
+}
+
+a.disabled {
+	text-decoration: line-through;
+}

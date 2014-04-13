@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom" createForm="false"
+	pageTitle="Meetup">
+	<xp:this.resources>
+		<xp:script src="/utils" clientSide="false"></xp:script>
+		<xp:bundle src="/settings.properties" var="settings"></xp:bundle>
+	</xp:this.resources>
+
+	<xc:_layout>
+		<xp:this.facets>
+			<xp:panel xp:key="body" disableOutputTag="true">
+				<xp:this.data>
+					<xp:dominoDocument var="event" databaseName="#{settings.cms_db}" action="openDocument"
+						ignoreRequestParams="true">
+						<xp:this.documentId><![CDATA[#{javascript:
+return dbLookupArray("", settings.cms_db, "events", context.getUrlParameter("date"), 7, {cache:settings.cache_enabled})[0];
+}]]></xp:this.documentId>
+					</xp:dominoDocument>
+				</xp:this.data>
+
+				<div class="section">
+					<div class="w-container">
+						<div class="w-row">
+							<div class="w-col w-col-7">
+								<h3>
+									<xp:text escape="true" value="#{event.date}">
+										<xp:this.converter>
+											<xp:convertDateTime pattern="d MMMM yyyy"></xp:convertDateTime>
+										</xp:this.converter>
+									</xp:text>
+								</h3>
+								<xp:text escape="false" rendered="#{not empty event.abstract}" tagName="p" id="abstract">
+									<xp:this.value><![CDATA[#{javascript:new org.markdown4j.Markdown4jProcessor().process(event.getItemValueString('abstract'));}]]></xp:this.value>
+								</xp:text>
+							</div>
+						</div>
+
+						<div class="w-row">
+							<div class="w-col w-col-7">
+								<xc:eventTopics eventId="#{javascript:event.getDocument().getUniversalID()}"></xc:eventTopics>
+							</div>
+							<div class="w-col w-col-1"></div>
+							<div class="w-col w-col-4">
+								<xc:eventLocation companyId="#{event.companyId}"></xc:eventLocation>
+							</div>
+						</div>
+
+
+						<div class="w-row">
+							<div class="w-col w-col-6">
+							</div>
+							<div class="w-col w-col-6">
+							</div>
+						</div>
+					</div>
+				</div>
+			</xp:panel>
+		</xp:this.facets>
+	</xc:_layout>
+</xp:view>

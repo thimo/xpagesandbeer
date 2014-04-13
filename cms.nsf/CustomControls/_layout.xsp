@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+	<xp:this.beforePageLoad><![CDATA[#{javascript:context.setLocale(new Locale("nl", "NL"));}]]></xp:this.beforePageLoad>
+
+	<!--
+		ACL added as a backup security feature. This should be put in each individual XPage as here it doesn't cause the login
+		screen to appear
+	-->
+	<xp:this.acl>
+		<xp:acl>
+			<xp:this.entries>
+				<xp:aclEntry right="EDITOR" type="ROLE" loaded="true">
+					<xp:this.name><![CDATA[[administrator]]]></xp:this.name>
+				</xp:aclEntry>
+			</xp:this.entries>
+		</xp:acl>
+	</xp:this.acl>
+
+	<div class="container" style="padding: 4px 0;">
+		<div class="pull-right">
+			Welcome&#160;
+			<b>
+				<xp:text escape="true">
+					<xp:this.value><![CDATA[#{javascript:@Name('[cn]', session.getEffectiveUserName());}]]></xp:this.value>
+				</xp:text>
+				&#160; | &#160;
+			</b>
+			<a href="/#{javascript:database.getFilePath().replace(/\\/, '/');}?logout">Log out</a>
+		</div>
+	</div>
+
+	<div class="navbar navbar-default">
+		<div class="container">
+			<div class="navbar-header">
+				<a href="${facesContext.externalContext.requestContextPath}" class="navbar-brand">XPages &amp; Beer</a>
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+			</div>
+			<div class="navbar-collapse collapse" id="navbar-main">
+				<ul class="nav navbar-nav navbar-right">
+					<li class="${javascript:if(compositeData.selectedMenuItem == 'events') 'active'}">
+						<xp:link escape="true" value="/events.xsp">Events</xp:link>
+					</li>
+					<!--					<li class="${javascript:if(compositeData.selectedMenuItem == 'topics') 'active'}">-->
+					<!--						<xp:link escape="true" value="/topics.xsp">Topics</xp:link>-->
+					<!--					</li>-->
+					<li class="${javascript:if(compositeData.selectedMenuItem == 'companies') 'active'}">
+						<xp:link escape="true" value="/companies.xsp">Companies</xp:link>
+					</li>
+					<li class="${javascript:if(compositeData.selectedMenuItem == 'persons') 'active'}">
+						<xp:link escape="true" value="/persons.xsp">Persons</xp:link>
+					</li>
+					<li class="${javascript:if(compositeData.selectedMenuItem == 'calendaritems') 'active'}">
+						<xp:link escape="true" value="/calendarItems.xsp">Calendar</xp:link>
+					</li>
+					<li class="${javascript:if(compositeData.selectedMenuItem == 'newsItems') 'active'}">
+						<xp:link escape="true" value="/newsItems.xsp">News</xp:link>
+					</li>
+					<li class="${javascript:if(compositeData.selectedMenuItem == 'pages') 'active'}">
+						<xp:link escape="true" value="/pages.xsp">Pages</xp:link>
+					</li>
+					<li class="${javascript:if(compositeData.selectedMenuItem == 'settings') 'active'}">
+						<xp:link escape="true" value="/settings.xsp">Settings</xp:link>
+					</li>
+					<!--					<li class="${javascript:if(compositeData.selectedMenuItem == 'registrations') 'active'}">-->
+					<!--						<xp:link escape="true" value="/registrations.xsp">Registrations</xp:link>-->
+					<!--					</li>-->
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="page-header" id="banner">
+			<div class="row">
+				<div class="col-lg-6">
+					<h1>
+						<xp:text value="#{compositeData.pageTitle}"></xp:text>
+					</h1>
+					<xp:panel tagName="p" styleClass="lead" rendered="#{compositeData.pageSubtitle != ''}">
+						<xp:text value="#{compositeData.pageSubtitle}" escape="false"></xp:text>
+					</xp:panel>
+				</div>
+				<div class="col-lg-6" style="padding-top: 20px;">
+					<div class="pull-right">
+						<xp:callback facetName="headerButtons"></xp:callback>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<xp:messages id="messages1" styleClass="alert alert-danger"></xp:messages>
+
+		<xp:callback facetName="body"></xp:callback>
+
+		<div class="row">
+			<div class="col-lg-6">
+				<div class="form-horizontal">
+				</div>
+			</div>
+		</div>
+
+		<hr />
+
+		<footer>
+			<p>
+				XPages &amp; Beer&#160;
+				<xp:text value="${javascript:(new Date()).getFullYear().toString();}"></xp:text>
+				, CMS by&#160;
+				<a href="http://www.defrog.nl/">Defrog</a>
+			</p>
+		</footer>
+
+	</div> <!-- /container -->
+
+
+	<script src="${facesContext.externalContext.requestContextPath}/js/jquery-1.10.2.min.js"></script>
+	<script src="${facesContext.externalContext.requestContextPath}/bootstrap/js/bootstrap.min.js"></script>
+	<script src="${facesContext.externalContext.requestContextPath}/bootstrap/extend/js/jasny-bootstrap.min.js"></script>
+	<script src="${facesContext.externalContext.requestContextPath}/js/autogrow.js"></script>
+	<script src="${facesContext.externalContext.requestContextPath}/plugins/select2/select2.min.js"></script>
+	<script src="${facesContext.externalContext.requestContextPath}/plugins/datepicker/js/bootstrap-datepicker.js"></script>
+
+	<xp:scriptBlock id="KeepMySessionAlive">
+		<!--		<xp:this.rendered><![CDATA[#{javascript:context.getUrlParameter("contenttype") == ''}]]></xp:this.rendered>-->
+		<xp:this.value><![CDATA[ 
+		var dbpath = '#{javascript:facesContext.getExternalContext().getRequestContextPath()}'; 
+		var sTimeoutSec = (parseInt('#{javascript:context.getProperty("xsp.session.timeout")}' || 15) * 60) - 30; 
+		if (!XSP.keepAlive) {
+			XSP.keepAlive=function xe_ka(){ 
+				setTimeout('XSP.keepAlive()',sTimeoutSec * 1000); 
+				dojo.xhrGet({url:dbpath + '/xsp/.ibmmodres/ping', 
+					handleAs:'text', 
+					preventCache:true}); 
+		}; 
+		setTimeout('XSP.keepAlive()',sTimeoutSec * 1000)} 
+		]]></xp:this.value>
+	</xp:scriptBlock>
+
+	<xp:scriptBlock type="text/javascript">
+		<xp:this.value><![CDATA[
+$(function() {
+	$('[aria-invalid="true"]').parent().parent().addClass('has-error');
+	$('textarea').autogrow({onInitialize:true,animate:false}); 
+})]]></xp:this.value>
+	</xp:scriptBlock>
+</xp:view>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom">
+	<xp:this.data>
+		<xp:dominoDocument var="eventCompany" action="openDocument" ignoreRequestParams="true">
+			<xp:this.databaseName><![CDATA[#{settings.cms_db}]]></xp:this.databaseName>
+			<xp:this.documentId><![CDATA[#{compositeData.companyId}]]></xp:this.documentId>
+		</xp:dominoDocument>
+	</xp:this.data>
+	<h4>Locatie</h4>
+	<xp:panel disableOutputTag="true" loaded="${not empty compositeData.companyId}">
+		<p>
+			<div>
+				<strong>
+					<xp:text escape="true" value="#{eventCompany.name}"></xp:text>
+				</strong>
+			</div>
+			<div>
+				<xp:text escape="true" value="#{eventCompany.address}"></xp:text>
+			</div>
+			<div>
+				<xp:text escape="true" value="#{eventCompany.zipcode}"></xp:text>
+				&#160;
+				<xp:text escape="true" value="#{eventCompany.city}"></xp:text>
+			</div>
+			<div>
+				<xp:link escape="true" text="#{eventCompany.websiteUrl}" value="#{eventCompany.websiteUrl}"></xp:link>
+			</div>
+		</p>
+		<p>
+			<xp:text escape="false">
+				<xp:this.value><![CDATA[#{javascript:new org.markdown4j.Markdown4jProcessor().process(eventCompany.getItemValueString('routeInfo'));}]]></xp:this.value>
+			</xp:text>
+		</p>
+		<div>
+			<a target="_blank" title="Klik om de locatie in Google Maps te bekijken"
+				href="https://maps.google.com/maps?z=14&amp;q=#{eventCompany.name} #{eventCompany.address} #{eventCompany.zipcode} #{eventCompany.city}">
+				<xp:image
+					url="http://maps.googleapis.com/maps/api/staticmap?zoom=12&amp;size=450x450&amp;sensor=false&amp;scale=2&amp;markers=color:red%7Clabel:#{eventCompany.name}%7C#{eventCompany.address} #{eventCompany.zipcode} #{eventCompany.city}"></xp:image>
+			</a> 
+		</div>
+	</xp:panel>
+	<xp:panel disableOutputTag="true" loaded="${empty compositeData.companyId}">
+		<xc:_page page_name="event_location_unknown" header_tagname="h1"></xc:_page>
+	</xp:panel>
+
+</xp:view>

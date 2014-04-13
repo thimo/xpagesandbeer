@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='utf-8'?>
+<view name='persons' xmlns='http://www.lotus.com/dxl' version='9.0' maintenanceversion='1.0'
+ replicaid='C1257BFA0065FC44' hide='web' showinmenu='false' publicaccess='false'
+ designerversion='8.5.3' unreadmarks='none' onopengoto='lastopened' onrefresh='displayindicator'
+ headers='beveled' opencollapsed='false' showresponsehierarchy='true' showmargin='true'
+ shrinkrows='false' extendlastcolumn='false' showhierarchies='false' unreadcolor='black'
+ rowlinecount='1' headerlinecount='1' rowspacing='1' bgcolor='white' totalscolor='black'
+ headerbgcolor='white' boldunreadrows='false' evaluateactions='false' allownewdocuments='false'
+ allowcustomizations='true' hidemarginborder='false' marginwidth='0px' marginbgcolor='white'
+ uniquekeys='false'>
+<noteinfo noteid='20e' unid='24D07F2AB208DDABC1257C01002733C6' sequence='15'>
+<created><datetime dst='true'>20131011T090811,58+02</datetime></created>
+<modified><datetime dst='true'>20140413T205837,61+02</datetime></modified>
+<revised><datetime>20140117T094136,43+01</datetime></revised>
+<lastaccessed><datetime dst='true'>20140413T205837,61+02</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20140413T205837,61+02</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Thimo Jansen/O=TJit</name><name>CN=Thimo Jansen/O=WEBCITC</name></updatedby>
+<wassignedby><name>CN=Thimo Jansen/O=WEBCITC</name></wassignedby><code event='selection'><formula
+>SELECT form = "person"</formula></code>
+<column sort='ascending' hidedetailrows='false' itemname='name' width='10'
+ resizable='true' separatemultiplevalues='false' sortnoaccent='true' sortnocase='true'
+ showaslinks='false'><columnheader title='name'><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='$1' width='10' resizable='true' separatemultiplevalues='false'
+ sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='unid'><font size='9pt' style='bold'/></columnheader><code event='value'><formula
+>@Text( @DocumentUniqueID )</formula></code></column>
+<column hidedetailrows='false' itemname='$6' width='10' resizable='true' separatemultiplevalues='false'
+ sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='lookup'><font size='9pt' style='bold'/></columnheader><code event='value'><formula
+>name + "|" + @Text( @DocumentUniqueID )</formula></code></column>
+<column hidedetailrows='false' itemname='companyId' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='companyId'><font size='9pt' style='bold'/></columnheader></column></view>
+

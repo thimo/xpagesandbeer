@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+	<xp:this.data>
+		<xp:dominoView var="eventTopics" databaseName="#{settings.cms_db}" viewName="topics">
+			<xp:this.keys><![CDATA[#{compositeData.eventId}]]></xp:this.keys>
+		</xp:dominoView>
+	</xp:this.data>
+
+	<h4>Programma</h4>
+
+	<xp:repeat id="topics" rows="30" indexVar="index" var="row" value="#{eventTopics}">
+		<div class="w-row">
+			<div class="w-col w-col-2 w-col-tiny-6">
+				<div>
+					<xp:text escape="true" value="#{row.startTime}">
+						<xp:this.converter>
+							<xp:convertDateTime pattern="HH:mm"></xp:convertDateTime>
+						</xp:this.converter>
+					</xp:text>
+				</div>
+			</div>
+			<div class="w-col w-col-10 w-col-tiny-6">
+				<div>
+					<xp:text escape="true" value="#{row.title}" style="#{javascript:if (!!row.getColumnValue('personId')) {'font-weight: bold;'}}"></xp:text>
+					<xp:panel rendered="#{not empty row.personId}" disableOutputTag="true">
+						<xp:this.data>
+							<xp:dominoDocument var="topicPerson" action="openDocument" ignoreRequestParams="true">
+								<xp:this.databaseName><![CDATA[#{settings.cms_db}]]></xp:this.databaseName>
+								<xp:this.documentId><![CDATA[#{row.personId}]]></xp:this.documentId>
+							</xp:dominoDocument>
+						</xp:this.data>
+						&#160;-&#160;
+						<i>
+							<xp:text escape="true" value="#{topicPerson.name}"></xp:text>
+						</i>
+					</xp:panel>
+					<div>
+						<xp:text escape="false">
+							<xp:this.value><![CDATA[#{javascript:new org.markdown4j.Markdown4jProcessor().process(row.getColumnValue('abstract'));}]]></xp:this.value>
+						</xp:text>
+					</div>
+					<xp:div rendered="#{not empty row.slideshareHtml and not compositeData.disableSlides}" styleClass="littleVerticalMargin">
+						<xp:text escape="false" id="slideshareHtml" value="#{row.slideshareHtml}">
+						</xp:text>
+					</xp:div>
+				</div>
+			</div>
+			<div class="w-col w-col-12 w-col-tiny-6">
+
+			</div>
+		</div>
+	</xp:repeat>
+</xp:view>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config>
+  <faces-config-extension>
+    <namespace-uri>http://www.ibm.com/xsp/custom</namespace-uri>
+    <default-prefix>xc</default-prefix>
+  </faces-config-extension>
+  <composite-component>
+    <component-type>_page</component-type>
+    <composite-name>_page</composite-name>
+    <composite-file>/_page.xsp</composite-file>
+    <composite-extension>
+      <designer-extension>
+        <in-palette>true</in-palette>
+      </designer-extension>
+    </composite-extension>
+    <property>
+      <property-name>page_name</property-name>
+      <property-class>string</property-class>
+      <property-extension>
+        <designer-extension>
+          <default-value>page_name</default-value>
+        </designer-extension>
+      </property-extension>
+    </property>
+    <property>
+      <property-name>header_tagname</property-name>
+      <property-class>string</property-class>
+      <property-extension>
+        <designer-extension>
+          <default-value>h1</default-value>
+        </designer-extension>
+      </property-extension>
+    </property>
+  </composite-component>
+</faces-config>

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xc="http://www.ibm.com/xsp/custom" pageTitle="News item">
+	<xp:this.acl>
+		<xp:acl>
+			<xp:this.entries>
+				<xp:aclEntry right="EDITOR" type="ROLE" loaded="true">
+					<xp:this.name><![CDATA[[administrator]]]></xp:this.name>
+				</xp:aclEntry>
+			</xp:this.entries>
+		</xp:acl>
+	</xp:this.acl>
+
+	<xp:this.dataContexts>
+		<xp:dataContext var="viewName" value="newsItems"></xp:dataContext>
+		<xp:dataContext var="documentName" value="newsItem"></xp:dataContext>
+	</xp:this.dataContexts>
+
+	<xp:this.resources>
+		<xp:script src="/utils" clientSide="false"></xp:script>
+		<xp:bundle src="/settings.properties" var="settings"></xp:bundle>
+	</xp:this.resources>
+
+	<xp:panel disableOutputTag="true">
+		<xp:this.data>
+			<xp:dominoDocument var="document1" formName="#{documentName}" action="editDocument"
+				computeWithForm="both">
+			</xp:dominoDocument>
+		</xp:this.data>
+
+		<xc:_layout selectedMenuItem="#{viewName}" pageTitle="News item">
+			<xc:this.pageSubtitle><![CDATA[#{javascript:
+if (document1.isNewNote()) {
+	return 'New news item';
+} else if (!document1.getItemValueDate('date')) {
+	return 'Unknown date';
+} else {
+	return dateFormat(document1.getItemValueDate('date'), 'd MMMM yyyy');
+}
+}]]></xc:this.pageSubtitle>
+			<xp:this.facets>
+				<xp:panel xp:key="headerButtons"></xp:panel>
+
+				<xp:panel xp:key="body" id="body">
+					<div class="row">
+						<div class="col-lg-8">
+							<div class="form-horizontal">
+								<div class="form-group">
+									<xp:label value="Date *" for="date" styleClass="col-lg-2"></xp:label>
+									<div class="col-lg-4">
+										<div class="input-group date" data-date-format="mm-dd-yyyy">
+											<xp:inputText id="date" value="#{document1.date}" required="true">
+												<xp:this.converter>
+													<xp:convertDateTime pattern="dd-MM-yyyy"></xp:convertDateTime>
+												</xp:this.converter>
+
+												<xp:this.attrs>
+													<xp:attr name="placeholder" value="#{settings.date_format_display}">
+													</xp:attr>
+												</xp:this.attrs>
+
+												<xp:this.validators>
+													<xp:validateRequired message="Please add a date. 'Cause without no date, we can't have no news item">
+													</xp:validateRequired>
+												</xp:this.validators>
+											</xp:inputText>
+											<span class="input-group-addon">
+												<i class="glyphicon glyphicon-calendar"></i>
+											</span>
+										</div>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<xp:label value="Title" for="title" styleClass="col-lg-2"></xp:label>
+									<div class="col-lg-10">
+										<xp:inputText id="title" value="#{document1.title}"></xp:inputText>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<xp:label value="Intro" for="intro" styleClass="col-lg-2"></xp:label>
+									<div class="col-lg-10">
+										<xp:inputTextarea id="intro" value="#{document1.intro}"></xp:inputTextarea>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<xp:label value="Body" for="body1" styleClass="col-lg-2"></xp:label>
+									<div class="col-lg-10">
+										<xp:inputTextarea id="body1" value="#{document1.body}"></xp:inputTextarea>
+									</div>
+								</div>
+
+								<xc:formActionButtons></xc:formActionButtons>
+							</div>
+						</div>
+					</div>
+				</xp:panel>
+
+			</xp:this.facets>
+		</xc:_layout>
+
+		<xp:scriptBlock type="text/javascript">
+			<xp:this.value><![CDATA[
+$(function() {
+	x$('#{id:companyId}').select2({
+			allowClear: true
+	});
+	
+	x$('#{id:status}').select2({});
+	
+	$('.input-group.date').datepicker({
+    format: "#{settings.date_format_display}",
+    startView: 0,
+    todayHighlight: true,
+    autoclose: true,
+    orientation: "auto left"
+	});
+});
+]]></xp:this.value>
+		</xp:scriptBlock>
+	</xp:panel>
+</xp:view>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+	<xp:this.dataContexts>
+		<xp:dataContext value="#{compositeData.fieldname}" var="fieldname"></xp:dataContext>
+		<xp:dataContext value="#{compositeData.dataDoc}" var="dataDoc"></xp:dataContext>
+		<xp:dataContext value="#{compositeData.title}" var="title"></xp:dataContext>
+		<xp:dataContext var="attachments">
+			<xp:this.value><![CDATA[#{javascript:dataDoc.getAttachmentList(fieldname)}]]></xp:this.value>
+		</xp:dataContext>
+	</xp:this.dataContexts>
+
+	<xp:panel tagName="div" style="margin: 4px 0;">
+		<xp:this.rendered><![CDATA[#{javascript:!attachments.isEmpty();}]]></xp:this.rendered>
+		<xp:label value="#{title} " styleClass="lighter">
+			<xp:this.rendered><![CDATA[#{title != '' && title != null}]]></xp:this.rendered>
+		</xp:label>
+
+		<xp:repeat id="repeatList" value="#{attachments}" var="attachData" indexVar="attachIndex" rows="300" disableOutputTag="true">
+			<xp:panel tagName="span">
+				<xp:this.dataContexts>
+					<xp:dataContext var="embObject">
+						<xp:this.value><![CDATA[#{javascript:attachments.get(attachIndex)}]]></xp:this.value>
+					</xp:dataContext>
+				</xp:this.dataContexts>
+
+				<xp:link styleClass="inlineAttachment">
+					<xp:this.text><![CDATA[#{embObject.name}]]></xp:this.text>
+					<xp:this.value><![CDATA[#{embObject.href}]]></xp:this.value>
+				</xp:link>
+				<xp:text escape="true" id="computedField1">
+					,
+					<xp:this.rendered><![CDATA[#{javascript:attachIndex < attachments.size() - 1}]]></xp:this.rendered>
+				</xp:text>
+			</xp:panel>
+		</xp:repeat>
+	</xp:panel>
+</xp:view>

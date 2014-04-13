@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='utf-8'?>
+<view name='topics' xmlns='http://www.lotus.com/dxl' version='9.0' maintenanceversion='1.0'
+ replicaid='C1257BFA0065FC44' hide='web' showinmenu='false' publicaccess='false'
+ designerversion='8.5.3' unreadmarks='none' onopengoto='lastopened' onrefresh='displayindicator'
+ headers='beveled' opencollapsed='false' showresponsehierarchy='false' showmargin='true'
+ shrinkrows='false' extendlastcolumn='false' showhierarchies='false' unreadcolor='black'
+ rowlinecount='1' headerlinecount='1' rowspacing='1' bgcolor='white' totalscolor='black'
+ headerbgcolor='white' boldunreadrows='false' evaluateactions='false' allownewdocuments='false'
+ allowcustomizations='true' hidemarginborder='false' marginwidth='0px' marginbgcolor='white'
+ uniquekeys='false'>
+<noteinfo noteid='352' unid='98A46902B6BE3FBEC1257C0100274574' sequence='13'>
+<created><datetime dst='true'>20131011T090856,84+02</datetime></created>
+<modified><datetime dst='true'>20140413T205839,26+02</datetime></modified>
+<revised><datetime>20140117T094139,05+01</datetime></revised>
+<lastaccessed><datetime dst='true'>20140413T205839,26+02</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20140413T205839,26+02</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Thimo Jansen/O=TJit</name><name>CN=Thimo Jansen/O=WEBCITC</name></updatedby>
+<wassignedby><name>CN=Thimo Jansen/O=WEBCITC</name></wassignedby><code event='selection'><formula
+>SELECT form = "topic"</formula></code>
+<column sort='ascending' hidedetailrows='false' itemname='eventId' width='10'
+ resizable='true' separatemultiplevalues='false' sortnoaccent='true' sortnocase='true'
+ showaslinks='false'><columnheader title='eventId'><font size='9pt' style='bold'/></columnheader></column>
+<column sort='ascending' hidedetailrows='false' itemname='startTime' width='10'
+ resizable='true' separatemultiplevalues='false' sortnoaccent='true' sortnocase='true'
+ showaslinks='false'><columnheader title='startTime'><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='personId' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='true' sortnocase='true' showaslinks='false'><columnheader
+ title='personId'><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='title' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='true' sortnocase='true' showaslinks='false'><columnheader
+ title='title'><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='abstract' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='true' sortnocase='true' showaslinks='false'><columnheader
+ title='abstract'><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='slideshareHtml' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='true' sortnocase='true' showaslinks='false'><columnheader
+ title='slideshareHtml'><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='links' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='true' sortnocase='true' showaslinks='false'><columnheader
+ title='links'><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='$1' width='10' resizable='true' separatemultiplevalues='false'
+ sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='unid'><font size='9pt' style='bold'/></columnheader><code event='value'><formula
+>@Text( @DocumentUniqueID )</formula></code></column></view>
+

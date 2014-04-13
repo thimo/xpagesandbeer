@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='utf-8'?>
+<view name='memos' xmlns='http://www.lotus.com/dxl' version='9.0' maintenanceversion='1.0'
+ replicaid='C1257BFA0065FC44' hide='web' showinmenu='false' publicaccess='false'
+ designerversion='8.5.3' unreadmarks='none' onopengoto='lastopened' onrefresh='displayindicator'
+ headers='beveled' opencollapsed='false' showresponsehierarchy='true' showmargin='true'
+ shrinkrows='false' extendlastcolumn='false' showhierarchies='false' unreadcolor='black'
+ rowlinecount='1' headerlinecount='1' rowspacing='1' bgcolor='white' totalscolor='black'
+ headerbgcolor='white' boldunreadrows='false' evaluateactions='false' allownewdocuments='false'
+ allowcustomizations='true' hidemarginborder='false' marginwidth='0px' marginbgcolor='white'
+ uniquekeys='false'>
+<noteinfo noteid='166' unid='1D304A29AC0DC49BC1257C8600525A08' sequence='11'>
+<created><datetime>20140221T155930,00+01</datetime></created>
+<modified><datetime dst='true'>20140413T205836,75+02</datetime></modified>
+<revised><datetime>20140221T160206,57+01</datetime></revised>
+<lastaccessed><datetime dst='true'>20140413T205836,75+02</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20140413T205836,75+02</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Thimo Jansen/O=WEBCITC</name></updatedby>
+<wassignedby><name>CN=Thimo Jansen/O=WEBCITC</name></wassignedby><code event='selection'><formula
+>SELECT Form = "Memo"</formula></code>
+<column sort='descending' hidedetailrows='false' itemname='$1' width='12'
+ resizable='true' separatemultiplevalues='false' sortnoaccent='true' sortnocase='true'
+ showaslinks='false'><columnheader title='Created'><font size='9pt' style='bold'/></columnheader><code
+ event='value'><formula>@Created</formula></code></column>
+<column hidedetailrows='false' itemname='SendTo' width='15' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='SendTo'><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='Subject' width='30' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
+ title='Subject'><font size='9pt' style='bold'/></columnheader></column></view>
+
