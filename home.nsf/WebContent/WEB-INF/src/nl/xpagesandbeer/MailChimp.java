@@ -2,7 +2,7 @@ package nl.xpagesandbeer;
 
 import nl.defrog.RealSimpleMailChimp.MailChimpClient;
 
-import org.json.simple.JSONArray;
+//import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 public class MailChimp {

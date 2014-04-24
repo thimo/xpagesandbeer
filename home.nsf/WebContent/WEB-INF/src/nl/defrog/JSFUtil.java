@@ -25,9 +25,7 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.el.VariableResolver;
 
-import lotus.domino.Database;
-import lotus.domino.NotesException;
-import lotus.domino.Session;
+import org.openntf.domino.*;
 
 import com.ibm.domino.xsp.module.nsf.NotesContext;
 import com.ibm.xsp.application.DesignerApplicationEx;
@@ -36,7 +34,7 @@ import com.ibm.xsp.designer.context.XSPContext;
 
 public class JSFUtil {
 
-	//private static OpenLogItem oli = new OpenLogItem();
+	// private static OpenLogItem oli = new OpenLogItem();
 	private static Session _signerSess;
 
 	public static DesignerApplicationEx getApplication() {
@@ -102,38 +100,9 @@ public class JSFUtil {
 
 	@SuppressWarnings("unchecked")
 	public static String getProfileUNID(String profileKey) {
-		try {
-			Vector profHash = getCurrentSession().evaluate("@Text(@Password(\"" + profileKey + "\"))");
-			String tmpUNID = profHash.firstElement().toString();
-			tmpUNID = tmpUNID.substring(1, tmpUNID.length() - 1);
-			return tmpUNID;
-		} catch (NotesException e) {
-			e.printStackTrace();
-			return "";
-		}
+		Vector profHash = getCurrentSession().evaluate("@Text(@Password(\"" + profileKey + "\"))");
+		String tmpUNID = profHash.firstElement().toString();
+		tmpUNID = tmpUNID.substring(1, tmpUNID.length() - 1);
+		return tmpUNID;
 	}
-
-	/**
-	 * @since 3.0.0 Added by Paul Withers to get current session as signer
-	 */
-	public static Session getSessionAsSigner() {
-		if (_signerSess == null) {
-			_signerSess = NotesContext.getCurrent().getSessionAsSigner();
-		} else {
-			try {
-				@SuppressWarnings("unused")
-				boolean pointless = _signerSess.isOnServer();
-			} catch (NotesException recycleSucks) {
-				// our database object was recycled so we'll need to get it
-				// again
-				try {
-					_signerSess = NotesContext.getCurrent().getSessionAsSigner();
-				} catch (Exception e) {
-
-				}
-			}
-		}
-		return _signerSess;
-	}
-
 }

@@ -1,18 +1,16 @@
 package nl.xpagesandbeer;
 
-import lotus.domino.DateTime;
-import lotus.domino.Document;
-import lotus.domino.MIMEEntity;
-import lotus.domino.MIMEHeader;
-import lotus.domino.Session;
-import lotus.domino.Stream;
+import java.util.Date;
+
+import org.openntf.domino.*;
+import org.openntf.domino.utils.*;
 
 import nl.defrog.JSFUtil;
 
 public class Mail {
 	public static void sendRegistrationThankyou(Document registrationDoc, Document eventDoc) {
 		try {
-			Session session = JSFUtil.getCurrentSession();
+			Session session = Factory.getSession();
 			session.setConvertMIME(false);
 
 			Document doc = registrationDoc.getParentDatabase().createDocument();
@@ -28,7 +26,8 @@ public class Mail {
 
 			Stream stream = session.createStream();
 
-			DateTime eventDate = (DateTime) eventDoc.getItemValueDateTimeArray("date").get(0);
+//			DateTime eventDate = (DateTime) eventDoc.getItemValueDateTimeArray("date").get(0);
+			Date eventDate = eventDoc.getItemValue("date", java.util.Date.class);
 
 			String firstname = Helper.getFirstName(registrationDoc.getItemValueString("name"));
 			stream.writeText(Helper.getSetting("email_registration_body")
@@ -57,7 +56,6 @@ public class Mail {
 			doc.send();
 			doc.save();
 
-			doc.recycle();
 			session.setConvertMIME(true);
 
 		} catch (Exception e) {
