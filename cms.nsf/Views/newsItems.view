@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<view name='newsItems' xmlns='http://www.lotus.com/dxl' version='9.0' maintenanceversion='1.0'
+<view name='newsItems' xmlns='http://www.lotus.com/dxl' version='9.0' maintenanceversion='1.1'
  replicaid='C1257BFA0065FC44' hide='web' showinmenu='false' publicaccess='false'
  designerversion='8.5.3' unreadmarks='none' onopengoto='lastopened' onrefresh='displayindicator'
  headers='beveled' opencollapsed='false' showresponsehierarchy='true' showmargin='true'
@@ -12,7 +12,7 @@
 <created><datetime>20140218T211150,85+01</datetime></created>
 <modified><datetime dst='true'>20140413T205839,39+02</datetime></modified>
 <revised><datetime>20140218T220436,65+01</datetime></revised>
-<lastaccessed><datetime dst='true'>20140413T205839,39+02</datetime></lastaccessed>
+<lastaccessed><datetime dst='true'>20140422T194251,58+02</datetime></lastaccessed>
 <addedtofile><datetime dst='true'>20140413T205839,39+02</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Thimo Jansen/O=WEBCITC</name></updatedby>
 <wassignedby><name>CN=Thimo Jansen/O=WEBCITC</name></wassignedby><code event='selection'><formula

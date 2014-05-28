@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<form name='calendarItem' xmlns='http://www.lotus.com/dxl' version='9.0' maintenanceversion='1.0'
+<form name='calendarItem' xmlns='http://www.lotus.com/dxl' version='9.0' maintenanceversion='1.1'
  replicaid='C1257BFA0065FC44' hide='web' publicaccess='false' designerversion='8.5.3'
  renderpassthrough='true'>
 <noteinfo noteid='3b2' unid='D481814849275312C1257C37006EAEB0' sequence='7'>

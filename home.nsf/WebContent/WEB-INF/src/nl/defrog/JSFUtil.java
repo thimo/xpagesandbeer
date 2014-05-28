@@ -27,7 +27,7 @@ import javax.faces.el.VariableResolver;
 
 import org.openntf.domino.*;
 
-import com.ibm.domino.xsp.module.nsf.NotesContext;
+//import com.ibm.domino.xsp.module.nsf.NotesContext;
 import com.ibm.xsp.application.DesignerApplicationEx;
 import com.ibm.xsp.component.UIViewRootEx;
 import com.ibm.xsp.designer.context.XSPContext;
@@ -35,7 +35,7 @@ import com.ibm.xsp.designer.context.XSPContext;
 public class JSFUtil {
 
 	// private static OpenLogItem oli = new OpenLogItem();
-	private static Session _signerSess;
+	// private static Session _signerSess;
 
 	public static DesignerApplicationEx getApplication() {
 		return (DesignerApplicationEx) getFacesContext().getApplication();
