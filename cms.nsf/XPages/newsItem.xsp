@@ -71,6 +71,32 @@ if (document1.isNewNote()) {
 								</div>
 
 								<div class="form-group">
+									<xp:label value="Archive *" for="date" styleClass="col-lg-2"></xp:label>
+									<div class="col-lg-4">
+										<div class="input-group date" data-date-format="mm-dd-yyyy">
+											<xp:inputText id="archiveDate" value="#{document1.archiveDate}" required="true">
+												<xp:this.converter>
+													<xp:convertDateTime pattern="dd-MM-yyyy"></xp:convertDateTime>
+												</xp:this.converter>
+
+												<xp:this.attrs>
+													<xp:attr name="placeholder" value="#{settings.date_format_display}">
+													</xp:attr>
+												</xp:this.attrs>
+
+												<xp:this.validators>
+													<xp:validateRequired message="Until what date is this item active?">
+													</xp:validateRequired>
+												</xp:this.validators>
+											</xp:inputText>
+											<span class="input-group-addon">
+												<i class="glyphicon glyphicon-calendar"></i>
+											</span>
+										</div>
+									</div>
+								</div>
+
+								<div class="form-group">
 									<xp:label value="Title" for="title" styleClass="col-lg-2"></xp:label>
 									<div class="col-lg-10">
 										<xp:inputText id="title" value="#{document1.title}"></xp:inputText>

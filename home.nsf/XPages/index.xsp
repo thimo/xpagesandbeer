@@ -17,7 +17,7 @@
 							</div>
 							<div class="w-col w-col-2">
 							</div>
-							<xp:panel styleClass="w-col w-col-5">
+							<xp:panel disableOutputTag="true">
 								<xp:this.data>
 									<xp:dominoDocument var="newsItem" databaseName="#{settings.cms_db}" action="openDocument"
 										ignoreRequestParams="true">
@@ -26,29 +26,31 @@ return dbColumnArray("", settings.cms_db, "newsItems", 5, {cache:settings.cache_
 }]]></xp:this.documentId>
 									</xp:dominoDocument>
 								</xp:this.data>
+								
+								<xp:panel styleClass="w-col w-col-5" rendered="#{javascript:newsItem.getItemValueDate('archiveDate') >= (new Date());}">
+									<h4>
+										<xp:text escape="true" value="${newsItem.title}"></xp:text>
+									</h4>
 
-								<h4>
-									<xp:text escape="true" value="${newsItem.title}"></xp:text>
-								</h4>
+									<p class="intro">
+										Nieuws van&#160;
+										<xp:text escape="true" value="#{newsItem.date}">
+											<xp:this.converter>
+												<xp:convertDateTime pattern="d MMMM yyyy"></xp:convertDateTime>
+											</xp:this.converter>
+										</xp:text>
+									</p>
 
-								<p class="intro">
-									Nieuws van&#160;
-									<xp:text escape="true" value="#{newsItem.date}">
-										<xp:this.converter>
-											<xp:convertDateTime pattern="d MMMM yyyy"></xp:convertDateTime>
-										</xp:this.converter>
-									</xp:text>
-								</p>
+									<xp:panel loaded="${javascript:newsItem.getItemValue('Body') != '' }" tagName="div" styleClass="body">
+										<xp:text escape="false">
+											<xp:this.value><![CDATA[${javascript:new org.markdown4j.Markdown4jProcessor().process(newsItem.getItemValueString('Body'));}]]></xp:this.value>
+										</xp:text>
+									</xp:panel>
 
-								<xp:panel loaded="${javascript:newsItem.getItemValue('Body') != '' }" tagName="div" styleClass="body">
-									<xp:text escape="false">
-										<xp:this.value><![CDATA[${javascript:new org.markdown4j.Markdown4jProcessor().process(newsItem.getItemValueString('Body'));}]]></xp:this.value>
-									</xp:text>
+									<p style="text-align: right;">
+										<xp:link escape="true" text="Meer nieuws in het archief" value="/news.xsp"></xp:link>
+									</p>
 								</xp:panel>
-
-								<p style="text-align: right;">
-									<xp:link escape="true" text="Meer nieuws in het archief" value="/news.xsp"></xp:link>
-								</p>
 							</xp:panel>
 						</div>
 					</div>
@@ -107,7 +109,14 @@ return dbColumnArray("", settings.cms_db, "eventsActive", 7, {cache:settings.cac
 							<div class="w-col w-col-1">
 							</div>
 							<div class="w-col w-col-4">
-								<xc:eventLocation companyId="#{event.companyId}"></xc:eventLocation>
+								<div class="w-row" style="margin-bottom: 30px;">
+									<xc:eventLocation companyId="#{event.companyId}"></xc:eventLocation>
+								</div>
+
+								<div class="w-row">
+									<xc:eventRegistrations eventId="#{event.id}"></xc:eventRegistrations>
+								</div>
+								
 							</div>
 						</div>
 					</div>

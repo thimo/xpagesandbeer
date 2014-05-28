@@ -41,7 +41,13 @@ return dbLookupArray("", settings.cms_db, "events", context.getUrlParameter("dat
 							</div>
 							<div class="w-col w-col-1"></div>
 							<div class="w-col w-col-4">
-								<xc:eventLocation companyId="#{event.companyId}"></xc:eventLocation>
+								<div class="w-row" style="margin-bottom: 30px;">
+									<xc:eventLocation companyId="#{event.companyId}"></xc:eventLocation>
+								</div>
+
+								<div class="w-row">
+									<xc:eventRegistrations eventId="#{event.id}"></xc:eventRegistrations>
+								</div>
 							</div>
 						</div>
 

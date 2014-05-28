@@ -6,7 +6,9 @@
 			<xp:this.documentId><![CDATA[#{compositeData.companyId}]]></xp:this.documentId>
 		</xp:dominoDocument>
 	</xp:this.data>
+	
 	<h4>Locatie</h4>
+	
 	<xp:panel disableOutputTag="true" loaded="${not empty compositeData.companyId}">
 		<p>
 			<div>

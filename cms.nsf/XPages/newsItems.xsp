@@ -33,6 +33,7 @@
 								<th>Date</th>
 								<th>Title</th>
 								<th>Intro</th>
+								<th>Archive</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -56,6 +57,13 @@
 									</td>
 									<td>
 										<xp:text value="#{row.intro}"></xp:text>
+									</td>
+									<td>
+										<xp:text value="#{row.archiveDate}">
+											<xp:this.converter>
+												<xp:convertDateTime pattern="d MMMM yyyy"></xp:convertDateTime>
+											</xp:this.converter>
+										</xp:text>
 									</td>
 								</tr>
 							</xp:repeat>

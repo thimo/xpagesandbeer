@@ -8,11 +8,11 @@
  headerbgcolor='white' boldunreadrows='false' evaluateactions='false' allownewdocuments='false'
  allowcustomizations='true' hidemarginborder='false' marginwidth='0px' marginbgcolor='white'
  uniquekeys='false'>
-<noteinfo noteid='36a' unid='62871B04E9DA5FBCC1257C83006EF2AD' sequence='9'>
+<noteinfo noteid='36a' unid='62871B04E9DA5FBCC1257C83006EF2AD' sequence='12'>
 <created><datetime>20140218T211150,85+01</datetime></created>
-<modified><datetime dst='true'>20140413T205839,39+02</datetime></modified>
-<revised><datetime>20140218T220436,65+01</datetime></revised>
-<lastaccessed><datetime dst='true'>20140422T194251,58+02</datetime></lastaccessed>
+<modified><datetime dst='true'>20140528T211107,26+02</datetime></modified>
+<revised><datetime dst='true'>20140528T211107,25+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20140528T211107,26+02</datetime></lastaccessed>
 <addedtofile><datetime dst='true'>20140413T205839,39+02</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Thimo Jansen/O=WEBCITC</name></updatedby>
 <wassignedby><name>CN=Thimo Jansen/O=WEBCITC</name></wassignedby><code event='selection'><formula
@@ -21,9 +21,10 @@
  resizable='true' separatemultiplevalues='false' sortnoaccent='false' sortnocase='true'
  showaslinks='false'><columnheader title='dateStr'><font size='9pt' style='bold'/></columnheader><code
  event='value'><formula>@Text( @Year( date ) )  + @Right( "00" + @Text( @Month( date ) ); 2 ) + @Right( "00" + @Text( @Day( date ) ); 2 )</formula></code></column>
-<column hidedetailrows='false' itemname='$1' width='10' resizable='true' separatemultiplevalues='false'
- sortnoaccent='true' sortnocase='true' showaslinks='false'><columnheader title='date'><font
- size='9pt' style='bold'/></columnheader><code event='value'><formula>@Date(date)</formula></code></column>
+<column hidedetailrows='false' itemname='date' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='true' sortnocase='true' showaslinks='false'><columnheader
+ title='date'><font size='9pt' style='bold'/></columnheader><code event='value'><formula
+>@Date(date)</formula></code></column>
 <column hidedetailrows='false' itemname='intro' width='10' resizable='true'
  separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
  title='intro'><font size='9pt' style='bold'/></columnheader></column>
@@ -36,5 +37,9 @@
 >@Text( @DocumentUniqueID )</formula></code></column>
 <column hidedetailrows='false' itemname='title' width='10' resizable='true'
  separatemultiplevalues='false' sortnoaccent='false' sortnocase='true' showaslinks='false'><columnheader
- title='title'><font size='9pt' style='bold'/></columnheader></column></view>
+ title='title'><font size='9pt' style='bold'/></columnheader></column>
+<column hidedetailrows='false' itemname='archiveDate' width='10' resizable='true'
+ separatemultiplevalues='false' sortnoaccent='true' sortnocase='true' showaslinks='false'><columnheader
+ title='archiveDate'><font size='9pt' style='bold'/></columnheader><code event='value'><formula
+>@Date(archiveDate)</formula></code></column></view>
 

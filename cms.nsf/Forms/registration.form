@@ -2,13 +2,13 @@
 <form name='registration' xmlns='http://www.lotus.com/dxl' version='9.0' maintenanceversion='1.1'
  replicaid='C1257BFA0065FC44' hide='web' publicaccess='false' designerversion='8.5.3'
  renderpassthrough='true'>
-<noteinfo noteid='3ce' unid='CC17B2E9F1C968B3C1257C0100272E7A' sequence='6'>
+<noteinfo noteid='3ce' unid='CC17B2E9F1C968B3C1257C0100272E7A' sequence='7'>
 <created><datetime dst='true'>20131011T090758,02+02</datetime></created>
-<modified><datetime dst='true'>20140413T205839,95+02</datetime></modified>
-<revised><datetime>20140117T094138,93+01</datetime></revised>
-<lastaccessed><datetime dst='true'>20140413T205839,95+02</datetime></lastaccessed>
+<modified><datetime dst='true'>20140528T220636,93+02</datetime></modified>
+<revised><datetime dst='true'>20140528T220636,92+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20140528T220636,93+02</datetime></lastaccessed>
 <addedtofile><datetime dst='true'>20140413T205839,95+02</datetime></addedtofile></noteinfo>
-<updatedby><name>CN=Thimo Jansen/O=TJit</name><name>CN=Thimo Jansen/O=WEBCITC</name></updatedby>
+<updatedby><name>CN=Thimo Jansen/O=WEBCITC</name></updatedby>
 <wassignedby><name>CN=Thimo Jansen/O=WEBCITC</name></wassignedby>
 <body><richtext>
 <pardef id='1' leftmargin='1in' tabs='L0.5000in L1in L1.5000in L2in L2.5000in L3in L3.5000in L4in'/>
@@ -55,6 +55,11 @@ Yg4BAIQAAAAAAAAAAAA=
 Yg4BAIQAAAAAAAAAAAA=
 </compositedata></par>
 <par def='1'>	eventId	<field type='text' kind='editable' name='eventId'/><compositedata
+ type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
+ aftercontainercount='1' afterbegincount='3'>
+Yg4BAIQAAAAAAAAAAAA=
+</compositedata></par>
+<par def='1'>	public	<field type='text' kind='editable' name='public'/><compositedata
  type='98' prevtype='65418' nexttype='222' afterparcount='6' containertype='65418'
  aftercontainercount='1' afterbegincount='3'>
 Yg4BAIQAAAAAAAAAAAA=

@@ -98,7 +98,7 @@ viewScope.eventUrl = '' + facesContext.getExternalContext().getRequestContextPat
 										</xp:inputText>
 									</div>
 								</div>
-								
+
 								<div class="form-group">
 									<xp:label value="Phone number" for="phonenumber" styleClass="col-lg-2"></xp:label>
 									<div class="col-lg-10">
@@ -118,6 +118,19 @@ viewScope.eventUrl = '' + facesContext.getExternalContext().getRequestContextPat
 												<xp:attr name="placeholder" value="Be nice"></xp:attr>
 											</xp:this.attrs>
 										</xp:inputTextarea>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<xp:label value="Privacy" for="privacy" styleClass="col-lg-2"></xp:label>
+									<div class="col-lg-10">
+										<div class="radio">
+											<xp:radioGroup id="privacy" value="#{document1.privacy}" defaultValue="firstname" layout="pageDirection">
+												<xp:selectItem itemLabel="Name and company" itemValue="fullnameandcompany"></xp:selectItem>
+												<xp:selectItem itemLabel="Full name" itemValue="fullname"></xp:selectItem>
+												<xp:selectItem itemLabel="First name" itemValue="firstname"></xp:selectItem>
+											</xp:radioGroup>
+										</div>
 									</div>
 								</div>
 
