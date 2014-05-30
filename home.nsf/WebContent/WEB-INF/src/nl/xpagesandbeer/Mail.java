@@ -20,29 +20,35 @@ public class Mail {
 			doc.replaceItemValue("From", Helper.getSetting("email_info"));
 			doc.replaceItemValue("BlindCopyTo", Helper.getSetting("email_info"));
 
-			MIMEEntity body = doc.createMIMEEntity();
-			body.createHeader("Subject").setHeaderVal(Helper.getSetting("email_registration_subject"));
-			body.createHeader("Content-Type").setHeaderVal("multipart/alternative");
-
-			Stream stream = session.createStream();
-
-//			DateTime eventDate = (DateTime) eventDoc.getItemValueDateTimeArray("date").get(0);
 			Date eventDate = eventDoc.getItemValue("date", java.util.Date.class);
+			
+			MIMEEntity mixed = doc.createMIMEEntity();
+			mixed.createHeader("Subject").setHeaderVal(Helper.getSetting("email_registration_subject"));
+			//body.createHeader("Content-Type").setHeaderVal("multipart/alternative");
+			mixed.createHeader("Content-Type").setHeaderVal("multipart/mixed");
+
+			MIMEEntity multipart = mixed.createChildEntity();
+			multipart.createHeader("Content-Type").setHeaderVal("multipart/alternative");
 
 			String firstname = Helper.getFirstName(registrationDoc.getItemValueString("name"));
-			stream.writeText(Helper.getSetting("email_registration_body")
+
+			Stream htmlStream = session.createStream();
+			htmlStream.writeText(Helper.getSetting("email_registration_body")
 					.replace("[name]", firstname)
 					.replace("[date]", CalendarUtils.dateFormatter(eventDate, "EEEE d MMMM")));
+			Stream plainStream = session.createStream();
+			htmlStream.setPosition(0);
+			plainStream.writeText(htmlStream.readText().replaceAll("\\<.*?\\>", ""));
 
-			MIMEEntity plaintext = body.createChildEntity();
-			plaintext.setContentFromText(stream, "text/plain;charset=UTF-8", MIMEEntity.ENC_IDENTITY_7BIT);
-			MIMEEntity richtext = body.createChildEntity();
-			richtext.setContentFromText(stream, "text/html;charset=UTF-8", MIMEEntity.ENC_IDENTITY_8BIT);
+			MIMEEntity plaintext = multipart.createChildEntity();
+			plaintext.setContentFromText(plainStream, "text/plain;charset=UTF-8", MIMEEntity.ENC_IDENTITY_7BIT);
+			MIMEEntity richtext = multipart.createChildEntity();
+			richtext.setContentFromText(htmlStream, "text/html;charset=UTF-8", MIMEEntity.ENC_IDENTITY_8BIT);
 
-			stream.close();
+			htmlStream.close();
 
 			// Add ical attachment for event
-			MIMEEntity mimeAttachment = body.createChildEntity();
+			MIMEEntity mimeAttachment = mixed.createChildEntity();
 
 			String filename = JSFUtil.getCurrentDatabase().getTitle() + " " + CalendarUtils.dateFormatter(eventDate, "dd-MM-yyyy") + ".ics";
 			MIMEHeader mimeHeader = mimeAttachment.createHeader("Content-Disposition");
