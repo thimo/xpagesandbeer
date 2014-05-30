@@ -445,7 +445,7 @@ a:visited {
 	border-color: #B94A48;
 }
 
-.w-checkbox {
+.w-checkbox, .w-radio {
 	display: block;
 	width: 100%;
 	min-height: 38px;
@@ -458,6 +458,10 @@ a:visited {
 	background-color: #FFF;
 }
 
-.w-checkbox input {
+.w-checkbox input, .w-radio input {
 	margin: 6px;
+}
+
+.w-radio label {
+	font-weight: normal;
 }

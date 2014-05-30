@@ -173,6 +173,18 @@ if (limit == 0.0) {
 										</xp:this.attrs>
 									</xp:inputTextarea>
 
+									<xp:label value="Privacy" for="privacy"></xp:label>
+									<div>Op de site tonen we bij een meetup wie zich hebben ingeschreven. Daarmee kun je snel zien we er nog meer
+										komen. Wat wil je in die lijst van jezelf laten zien?</div>
+									<div class="w-radio">
+										<xp:radio text="Mijn naam en de organisatie waarvoor ik werk" id="privacy1" groupName="privacy"
+											selectedValue="fullnameandcompany" value="#{registration.privacy}">
+										</xp:radio>
+										<xp:radio text="Mijn naam" id="privacy2" groupName="privacy" selectedValue="fullname" value="#{registration.privacy}"></xp:radio>
+										<xp:radio text="Alleen mijn voornaam" id="privacy3" groupName="privacy" selectedValue="firstname"
+											value="#{registration.privacy}"></xp:radio>
+									</div>
+
 									<div class="w-checkbox">
 										<xp:checkBox text="Hou me op de hoogte" id="mailinglist" value="#{registration.mailinglist}"
 											defaultChecked="true" checkedValue="1" uncheckedValue="0">
