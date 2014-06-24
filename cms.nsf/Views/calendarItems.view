@@ -8,13 +8,13 @@
  totalscolor='black' headerbgcolor='white' boldunreadrows='false' evaluateactions='false'
  allownewdocuments='false' allowcustomizations='true' hidemarginborder='false'
  marginwidth='0px' marginbgcolor='white' uniquekeys='false'>
-<noteinfo noteid='336' unid='A62D68A015761864C1257C37006F8945' sequence='14'>
+<noteinfo noteid='336' unid='A62D68A015761864C1257C37006F8945' sequence='17'>
 <created><datetime>20131204T211816,37+01</datetime></created>
-<modified><datetime dst='true'>20140413T205839,11+02</datetime></modified>
-<revised><datetime>20140117T094135,67+01</datetime></revised>
-<lastaccessed><datetime dst='true'>20140413T205839,11+02</datetime></lastaccessed>
+<modified><datetime dst='true'>20140530T212209,35+02</datetime></modified>
+<revised><datetime dst='true'>20140530T212209,34+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20140530T212209,35+02</datetime></lastaccessed>
 <addedtofile><datetime dst='true'>20140413T205839,11+02</datetime></addedtofile></noteinfo>
-<updatedby><name>CN=Thimo Jansen/O=TJit</name><name>CN=Thimo Jansen/O=WEBCITC</name></updatedby>
+<updatedby><name>CN=Thimo Jansen/O=WEBCITC</name></updatedby>
 <wassignedby><name>CN=Thimo Jansen/O=WEBCITC</name></wassignedby><code event='selection'><formula
 >SELECT form = "calendarItem"</formula></code>
 <column sort='descending' hidedetailrows='false' itemname='$1' width='10'

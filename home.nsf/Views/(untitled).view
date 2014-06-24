@@ -2,11 +2,11 @@
 <view xmlns='http://www.lotus.com/dxl' version='9.0' maintenanceversion='1.1'
  replicaid='C1257AF2006A18BE' showinmenu='true' publicaccess='false' default='true'
  noviewformat='true'>
-<noteinfo noteid='362' unid='B78121ED219F3BA3C1257AF2006A18C0' sequence='4'>
+<noteinfo noteid='362' unid='B78121ED219F3BA3C1257AF2006A18C0' sequence='6'>
 <created><datetime>20130113T201851,52+01</datetime></created>
-<modified><datetime dst='true'>20140530T212222,61+02</datetime></modified>
-<revised><datetime dst='true'>20140530T212222,60+02</datetime></revised>
-<lastaccessed><datetime dst='true'>20140530T212222,61+02</datetime></lastaccessed>
+<modified><datetime dst='true'>20140530T222014,75+02</datetime></modified>
+<revised><datetime dst='true'>20140530T222014,74+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20140530T222014,75+02</datetime></lastaccessed>
 <addedtofile><datetime dst='true'>20140413T205804,86+02</datetime></addedtofile></noteinfo>
 <updatedby><name>CN=Thimo Jansen/O=TJit</name><name>CN=Thimo Jansen/O=WEBCITC</name></updatedby>
 <wassignedby><name>CN=Thimo Jansen/O=WEBCITC</name></wassignedby><code event='selection'><formula

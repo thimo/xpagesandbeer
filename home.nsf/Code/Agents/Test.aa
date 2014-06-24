@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='utf-8'?>
+<agent name='Test' xmlns='http://www.lotus.com/dxl' version='9.0' maintenanceversion='1.1'
+ replicaid='C1257AF2006A18BE' hide='v3' publicaccess='false' designerversion='8.5.3'
+ agenttype='simpleaction'>
+<noteinfo noteid='38a' unid='FF4B7F35C8C9ABA5C1257AF200758A54' sequence='10'>
+<created><datetime>20130113T222351,24+01</datetime></created>
+<modified><datetime dst='true'>20140624T113123,94+02</datetime></modified>
+<revised><datetime dst='true'>20140624T113123,93+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20140624T113123,94+02</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20140624T113123,92+02</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Thimo Jansen/O=WEBCITC</name></updatedby>
+<wassignedby><name>CN=Thimo Jansen/O=WEBCITC</name></wassignedby>
+<designchange><datetime dst='true'>20140624T113123,71+02</datetime></designchange>
+<trigger type='actionsmenu'/>
+<documentset type='selected'/></agent>
+
