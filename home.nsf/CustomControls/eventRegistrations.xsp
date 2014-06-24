@@ -9,13 +9,16 @@
 		</xp:this.data>
 
 		<xp:panel tagName="h4" rendered="#{javascript:getComponent('repeat1').getRowCount() > 0}">
-			Aanmeldingen &#160;<span style="font-weight: normal;">(
-			<xp:text value="#{javascript:getComponent('repeat1').getRowCount()}">
-				<xp:this.converter>
-					<xp:convertNumber type="number" integerOnly="true"></xp:convertNumber>
-				</xp:this.converter>
-			</xp:text>
-			)</span>
+			Aanmeldingen &#160;
+			<span style="font-weight: normal;">
+				(
+				<xp:text value="#{javascript:getComponent('repeat1').getRowCount()}">
+					<xp:this.converter>
+						<xp:convertNumber type="number" integerOnly="true"></xp:convertNumber>
+					</xp:this.converter>
+				</xp:text>
+				)
+			</span>
 		</xp:panel>
 
 		<xp:repeat id="repeat1" rows="9999" value="#{registrations}" var="row" indexVar="index">
@@ -25,24 +28,19 @@
 var name = row.getColumnValue('name');
 var privacy = row.getColumnValue('privacy');
 
-if (privacy == 'fullnameandcompany') {
-	var company = row.getColumnValue('company');
-	if (!!company) {
-		return name + ", " + company;
-	} else {
-		return name;
-	}
-} else if (privacy == 'fullname') {
-	return name;
-} else {
+if (privacy == 'firstname') {
 	if (name.indexOf(' ') < 0) {
 		return name;
 	} else {
 		return name.substring(0, name.indexOf(' '));
 	}
+} else {
+	return name;
 }
 }]]></xp:this.value>
 				</xp:text>
+				<xp:text style="color: #aaa;" rendered="#{row.privacy == 'fullnameandcompany' &amp;&amp; not empty row.company}"
+					value=", #{row.company}"></xp:text>
 			</div>
 		</xp:repeat>
 	</xp:panel>
