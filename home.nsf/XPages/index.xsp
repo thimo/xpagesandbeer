@@ -26,7 +26,7 @@ return dbColumnArray("", settings.cms_db, "newsItems", 5, {cache:settings.cache_
 }]]></xp:this.documentId>
 									</xp:dominoDocument>
 								</xp:this.data>
-								
+
 								<xp:panel styleClass="w-col w-col-5" rendered="#{javascript:newsItem.getItemValueDate('archiveDate') >= (new Date());}">
 									<h4>
 										<xp:text escape="true" value="${newsItem.title}"></xp:text>
@@ -71,7 +71,12 @@ return dbColumnArray("", settings.cms_db, "eventsActive", 7, {cache:settings.cac
 						</xp:dominoDocument>
 					</xp:this.data>
 
-					<div class="w-container">
+					<xp:panel styleClass="w-container">
+						<xp:this.dataContexts>
+							<xp:dataContext var="eventInFuture">
+								<xp:this.value><![CDATA[${javascript:(event.getItemValueDate('date').getTime() + 24*60*60*1000) >= (new Date()).getTime()}]]></xp:this.value>
+							</xp:dataContext>
+						</xp:this.dataContexts>
 						<div class="w-row">
 							<div class="w-col w-col-7">
 								<h3>
@@ -90,19 +95,19 @@ return dbColumnArray("", settings.cms_db, "eventsActive", 7, {cache:settings.cac
 						</div>
 						<div class="w-row">
 							<div class="w-col w-col-7">
-								<xc:eventTopics eventId="#{javascript:event.getDocument().getUniversalID()}" disableSlides="true"></xc:eventTopics>
+								<xc:eventTopics eventId="#{javascript:event.getDocument().getUniversalID()}"></xc:eventTopics>
 
 								<div style="margin-top: 40px;">
 									<xc:_page page_name="event_registration_open" header_tagname="h4">
-										<xp:this.rendered><![CDATA[#{javascript:event.getItemValueDate('date').getTime() >= (new Date()).getTime()}]]></xp:this.rendered>
+										<xp:this.rendered><![CDATA[#{eventInFuture}]]></xp:this.rendered>
 									</xc:_page>
 
 									<xp:link styleClass="button" escape="true" text="Aanmelden" value="/aanmelden.xsp">
-										<xp:this.rendered><![CDATA[#{javascript:event.getItemValueDate('date').getTime() >= (new Date()).getTime()}]]></xp:this.rendered>
+										<xp:this.rendered><![CDATA[#{eventInFuture}]]></xp:this.rendered>
 									</xp:link>
 
 									<xc:_page page_name="event_registration_closed" header_tagname="h4">
-										<xp:this.rendered><![CDATA[#{javascript:event.getItemValueDate('date').getTime() < (new Date()).getTime()}]]></xp:this.rendered>
+										<xp:this.rendered><![CDATA[#{not eventInFuture}]]></xp:this.rendered>
 									</xc:_page>
 								</div>
 							</div>
@@ -116,10 +121,10 @@ return dbColumnArray("", settings.cms_db, "eventsActive", 7, {cache:settings.cac
 								<div class="w-row">
 									<xc:eventRegistrations eventId="#{event.id}"></xc:eventRegistrations>
 								</div>
-								
+
 							</div>
 						</div>
-					</div>
+					</xp:panel>
 				</xp:panel>
 
 				<xp:panel disableOutputTag="true">
