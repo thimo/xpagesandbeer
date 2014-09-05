@@ -1,13 +1,13 @@
 <?xml version='1.0' encoding='utf-8'?>
 <note default='true' class='icon' xmlns='http://www.lotus.com/dxl' version='9.0'
  maintenanceversion='1.1' replicaid='C1257AF2006A18BE'>
-<noteinfo noteid='122' unid='AEB3C710197FA33EC1257AF2006A18C1' sequence='0'>
+<noteinfo noteid='122' unid='AEB3C710197FA33EC1257AF2006A18C1' sequence='2'>
 <created><datetime>20130113T201851,53+01</datetime></created>
-<modified><datetime dst='true'>20140413T205759,25+02</datetime></modified>
-<revised><datetime>20140206T215342,11+01</datetime></revised>
-<lastaccessed><datetime dst='true'>20140413T205759,25+02</datetime></lastaccessed>
+<modified><datetime dst='true'>20140905T132147,34+02</datetime></modified>
+<revised><datetime dst='true'>20140905T132147,33+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20140905T132147,34+02</datetime></lastaccessed>
 <addedtofile><datetime dst='true'>20140413T205759,25+02</datetime></addedtofile></noteinfo>
-<updatedby><name>CN=Thimo Jansen/O=TJit</name><name>CN=Thimo Jansen/O=WEBCITC</name></updatedby>
+<updatedby><name>CN=Thimo Jansen/O=WEBCITC</name></updatedby>
 <item name='IconBitmap' summary='true'>
 <rawitemdata type='6'>
 AiAgAQAA///////wD///4Af//8AD//4AAH/8AAA/+AAAH/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAA
@@ -23,13 +23,12 @@ d30fAAAAAPHXd33Xd3d913d9HwAAAADx13d913d3fdd3fR8AAAAA8R3d0dd3d30d3dEfAAAAAA8R
 EREdd3fRERER8AAAAAAA////Ed3dEf///wAAAAAAAAAAAPERER8AAAAAAAAAAAAAAAAP///wAAAA
 AAAAUEECICABAAD/////+A4DgA==
 </rawitemdata></item>
-<item name='$DefaultXPage'><text>index.xsp</text></item>
+<item name='$LaunchXPageRunOnServer'><text>0</text></item>
+<item name='$Daos'><text>0</text></item>
 <item name='$UpdatedByLimit'><number>10</number></item>
 <item name='$RevisionsLimit'><number>10</number></item>
-<item name='$TITLE'><text>XPages &amp; Beer
-</text></item>
-<item name='$Flags'><text>J!z271</text></item>
-<item name='$LaunchXPageRunOnServer'><text>0</text></item>
-<item name='$FlagsNoRefresh'><text/></item>
-<item name='$Daos'><text>0</text></item></note>
+<item name='$DefaultXPage'><text>index.xsp</text></item>
+<item name='$TITLE'><text>XPages &amp; Beer</text></item>
+<item name='$Flags'><text>Jz217!</text></item>
+<item name='$FlagsNoRefresh'><text>rv</text></item></note>
 
