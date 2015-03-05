@@ -5,7 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Calendar;
 import java.util.Locale;
-//import java.util.Vector;
 
 import org.openntf.domino.*;
 import org.openntf.domino.utils.Factory;
@@ -21,7 +20,6 @@ import net.fortuna.ical4j.model.property.Location;
 import net.fortuna.ical4j.model.property.ProdId;
 import net.fortuna.ical4j.model.property.Uid;
 import net.fortuna.ical4j.util.UidGenerator;
-//import nl.defrog.JSFUtil;
 import nl.defrog.Utils;
 
 public class CalendarUtils {
